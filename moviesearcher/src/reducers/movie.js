@@ -11,6 +11,7 @@ export const init = {
 	},
 	isLoading: true,
 	data: {},
+	isFavorite: false,
 }
 
 export default function movie(state = init, action) {
@@ -23,6 +24,7 @@ export default function movie(state = init, action) {
 					isError: false,
 					error: null,
 				},
+				isFavorite: false,
 			}
 		case GET_MOVIE_SUCCESS:
 			return {

@@ -1,9 +1,8 @@
 import React from 'react'
-import { useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import FilmCard from './FilmCard'
-import fetchTopFilms from '../actions/fetchTopFilms.js'
+import fetchSearchFilms from '../actions/fetchSearchFilms.js'
 import InfiniteScroll from 'react-infinite-scroller'
 
 const FilmsWrapper = styled.ul`
@@ -18,11 +17,9 @@ const FilmsWrapper = styled.ul`
 		grid-template-columns: 1fr;
 	}
 `
-
-function FilmList(props) {
-	const { fetchData, films } = props
-	const { data, isLoading, error, currentPage, totalPages } = films
-	useEffect(() => fetchData(), []) // eslint-disable-line react-hooks/exhaustive-deps
+function Search(props) {
+	const { searchFilms, fetchSearchData } = props
+	const { data, isLoading, error, currentPage, totalPages } = searchFilms
 	const filmCards = data.map(film => (
 		<li key={film.id}>
 			<FilmCard film={film} />
@@ -34,7 +31,7 @@ function FilmList(props) {
 	return (
 		<InfiniteScroll
 			pageStart={0}
-			loadMore={() => fetchData()}
+			loadMore={() => fetchSearchData()}
 			hasMore={isLoading ? false : currentPage <= totalPages ? true : false}
 			loader={<div key={-1}>wait...</div>}
 			initialLoad={false}
@@ -45,9 +42,9 @@ function FilmList(props) {
 }
 
 const mapStateToProps = state => {
-	const { films } = state
+	const { searchFilms } = state
 	return {
-		films,
+		searchFilms,
 	}
 }
 
@@ -58,14 +55,15 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { films } = stateProps
-	const fetchData = () => {
-		dispatchProps.dispatch(fetchTopFilms(films.currentPage))
+	const { dispatch } = dispatchProps
+	const { query, currentPage } = stateProps.searchFilms
+	const fetchSearchData = () => {
+		dispatch(fetchSearchFilms(currentPage, query))
 	}
 	return {
 		...ownProps,
-		fetchData,
-		films,
+		...stateProps,
+		fetchSearchData,
 	}
 }
 
@@ -73,4 +71,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
 	mergeProps
-)(FilmList)
+)(Search)

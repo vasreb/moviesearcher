@@ -64,6 +64,7 @@ const Genres = styled.ul`
 	padding: 0;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	margin-top: auto;
 	margin-bottom: 20px;
 `
@@ -75,6 +76,7 @@ const Genre = styled(Link)`
 	box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.85);
 	padding: 5px;
 	margin: 0 10px;
+	box-sizing: border-box;
 `
 
 const Primary = styled.div`
@@ -93,6 +95,8 @@ const Primary = styled.div`
 const Secondary = styled(Primary)`
 	margin-top: 24px;
 	font-size: 20px;
+	display: flex;
+	flex-direction: row;
 `
 
 const Rating = styled.h3`
@@ -101,12 +105,37 @@ const Rating = styled.h3`
 	margin-top: auto;
 	margin-bottom: 20px;
 `
+const InfoColumn = styled.div`
+	width: 50%;
+	font-family: Geneva, Tahoma, Verdana, sans-serif;
+	font-size: 1.22em;
+	word-wrap: break-word;
+	> :nth-child(2n + 1) {
+		background-color: #c9d8d8;
+	}
+`
+
+const InfoRow = styled.div`
+	min-height: 1.5em;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+`
+const AddToFav = styled.div`
+	box-shadow: 0px 0px 4px 0px black;
+	padding: 10px;
+	box-sizing: border-box;
+	max-width: 180px;
+	transition: transform 0.1s ease-in;
+	&:hover {
+		transform: scale(1.05);
+	}
+`
+const RemoveFromFav = styled(AddToFav)``
 
 function FilmPage(props) {
-	const { data, isLoading, error } = props.movie
-	useEffect(() => props.fetchData(props.match.params.id), [
-		props.match.params.id,
-	])
+	const { data, isLoading, error, isFavorite } = props.movie
+	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
 	if (error.isError) {
 		return <Redirect to="/404" />
 	}
@@ -120,12 +149,17 @@ function FilmPage(props) {
 		vote_average,
 		vote_count,
 		release_date,
+		tagline,
+		revenue,
+		budget,
+		status,
 	} = data
 	const genresLinks = genres.map(genre => (
 		<li key={genre.id}>
-			<Genre>{genre.name}</Genre>
+			<Genre to="/genre">{genre.name}</Genre>
 		</li>
 	))
+	const ToggleFav = () => {}
 	return (
 		<FilmWrapper>
 			<Primary>
@@ -144,13 +178,28 @@ function FilmPage(props) {
 						<br />
 						Vote count: {vote_count}
 					</Rating>
+					{isFavorite ? (
+						<RemoveFromFav onClick={ToggleFav}>Remove from fav</RemoveFromFav>
+					) : (
+						<AddToFav onClick={ToggleFav}>Add to favorite</AddToFav>
+					)}
 					<Genres>
 						Genres:
 						{genresLinks}
 					</Genres>
 				</Description>
 			</Primary>
-			<Secondary>Release date: {release_date}</Secondary>
+			<Secondary>
+				<InfoColumn>
+					<InfoRow>Release date: {release_date || '-'}</InfoRow>
+					<InfoRow>Status: {status || '-'}</InfoRow>
+					<InfoRow>Tagline: {tagline || '-'}</InfoRow>
+				</InfoColumn>
+				<InfoColumn>
+					<InfoRow>Budget: ${budget || '-'}</InfoRow>
+					<InfoRow>Revenue: ${revenue || '-'}</InfoRow>
+				</InfoColumn>
+			</Secondary>
 		</FilmWrapper>
 	)
 }
@@ -177,6 +226,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		...stateProps,
 		fetchData,
 		...ownProps,
+		dispatch,
 	}
 }
 

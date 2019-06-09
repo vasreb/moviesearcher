@@ -1,7 +1,9 @@
 import {
-	GET_FILMS_REQUEST,
-	GET_FILMS_SUCCESS,
-	GET_FILMS_ERROR,
+	GET_SEARCH_REQUEST,
+	GET_SEARCH_SUCCESS,
+	GET_SEARCH_ERROR,
+	CHANGE_SEARCH_QUERY,
+	NEW_SEARCH_REQUEST,
 } from '../constants/constants'
 
 export const init = {
@@ -13,11 +15,18 @@ export const init = {
 	data: [],
 	totalPages: null,
 	currentPage: 1,
+	query: '',
 }
 
-export default function films(state = init, action) {
+export default function searchFilms(state = init, action) {
 	switch (action.type) {
-		case GET_FILMS_REQUEST:
+		case NEW_SEARCH_REQUEST:
+			return {
+				...state,
+				data: [],
+				currentPage: 1,
+			}
+		case GET_SEARCH_REQUEST:
 			return {
 				...state,
 				isLoading: true,
@@ -26,7 +35,7 @@ export default function films(state = init, action) {
 					error: null,
 				},
 			}
-		case GET_FILMS_SUCCESS:
+		case GET_SEARCH_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
@@ -34,7 +43,7 @@ export default function films(state = init, action) {
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_FILMS_ERROR:
+		case GET_SEARCH_ERROR:
 			return {
 				...state,
 				isError: true,
@@ -42,6 +51,11 @@ export default function films(state = init, action) {
 					isError: true,
 					error: action.payload,
 				},
+			}
+		case CHANGE_SEARCH_QUERY:
+			return {
+				...state,
+				query: action.payload,
 			}
 		default:
 			return state

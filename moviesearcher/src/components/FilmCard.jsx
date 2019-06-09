@@ -73,8 +73,6 @@ const StyledLink = styled(Link)`
 	align-items: center;
 `
 
-const Genre = styled.li``
-
 export default function Film(props) {
 	const { id, overview, title } = props.film
 	return (
