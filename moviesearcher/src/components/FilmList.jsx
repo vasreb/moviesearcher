@@ -1,9 +1,6 @@
 import React from 'react'
-import { useEffect } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
 import FilmCard from './FilmCard'
-import fetchTopFilms from '../actions/fetchTopFilms.js'
 import InfiniteScroll from 'react-infinite-scroller'
 
 const FilmsWrapper = styled.ul`
@@ -19,10 +16,9 @@ const FilmsWrapper = styled.ul`
 	}
 `
 
-function FilmList(props) {
+export default function FilmList(props) {
 	const { fetchData, films } = props
 	const { data, isLoading, error, currentPage, totalPages } = films
-	useEffect(() => fetchData(), []) // eslint-disable-line react-hooks/exhaustive-deps
 	const filmCards = data.map(film => (
 		<li key={film.id}>
 			<FilmCard film={film} />
@@ -43,34 +39,3 @@ function FilmList(props) {
 		</InfiniteScroll>
 	)
 }
-
-const mapStateToProps = state => {
-	const { films } = state
-	return {
-		films,
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		dispatch,
-	}
-}
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { films } = stateProps
-	const fetchData = () => {
-		dispatchProps.dispatch(fetchTopFilms(films.currentPage))
-	}
-	return {
-		...ownProps,
-		fetchData,
-		films,
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-	mergeProps
-)(FilmList)

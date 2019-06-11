@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
 import Header from './Header.jsx'
 
-const FilmList = React.lazy(() => import('./FilmList.jsx'))
+const Best = React.lazy(() => import('./../containers/Best.jsx'))
 const Page404 = React.lazy(() => import('./Page404.jsx'))
 const FilmPage = React.lazy(() => import('./FilmPage.jsx'))
-const Search = React.lazy(() => import('./Search.jsx'))
+const Search = React.lazy(() => import('./../containers/Search.jsx'))
 
 const AppWrapper = styled.div`
 	background-color: Snow;
@@ -27,11 +27,11 @@ function App() {
 			<MainWrapper>
 				<Suspense fallback="loading">
 					<Switch>
-						<Route exact path="/" component={FilmList} />
+						<Route exact path="/" component={Best} />
 						<Route exact path="/404" component={Page404} />
 						<Route exact path="/film/:id" component={FilmPage} />
-						<Route exact path="/best" component={FilmList} />
-						<Route exact path="/favorite" component={FilmList} />
+						<Route exact path="/best" component={Best} />
+						<Route exact path="/favorite" component={Best} />
 						<Route exact path="/search" component={Search} />
 					</Switch>
 				</Suspense>
