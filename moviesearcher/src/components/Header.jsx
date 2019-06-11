@@ -115,7 +115,7 @@ function Header(props) {
 					<Logo>MovieSearcher</Logo>
 				</StyledLink>
 				<HeaderItemSearch>
-					<Search onChange={handleSearch} />
+					<Search onChange={handleSearch} value={props.query} />
 				</HeaderItemSearch>
 				<HeaderItem>
 					<StyledLink to="/best">Best</StyledLink>
@@ -142,12 +142,13 @@ const mapDispatchToProps = dispatch => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const { searchFilms } = stateProps
-	const { isLoading } = searchFilms
+	const { isLoading, query } = searchFilms
 	return {
 		...stateProps,
 		...dispatchProps,
 		...ownProps,
 		isLoading,
+		query,
 	}
 }
 

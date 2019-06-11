@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import fetchMovie from './../actions/fetchMovie.js'
+import FavoriteButton from './FavoriteButton'
 
 const FilmWrapper = styled.div`
 	margin: 0 auto;
@@ -121,20 +122,9 @@ const InfoRow = styled.div`
 	padding: 5px;
 	box-sizing: border-box;
 `
-const AddToFav = styled.div`
-	box-shadow: 0px 0px 4px 0px black;
-	padding: 10px;
-	box-sizing: border-box;
-	max-width: 180px;
-	transition: transform 0.1s ease-in;
-	&:hover {
-		transform: scale(1.05);
-	}
-`
-const RemoveFromFav = styled(AddToFav)``
 
 function FilmPage(props) {
-	const { data, isLoading, error, isFavorite } = props.movie
+	const { data, isLoading, error } = props.movie
 	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
 	if (error.isError) {
 		return <Redirect to="/404" />
@@ -153,13 +143,13 @@ function FilmPage(props) {
 		revenue,
 		budget,
 		status,
+		id,
 	} = data
 	const genresLinks = genres.map(genre => (
 		<li key={genre.id}>
 			<Genre to="/genre">{genre.name}</Genre>
 		</li>
 	))
-	const ToggleFav = () => {}
 	return (
 		<FilmWrapper>
 			<Primary>
@@ -178,11 +168,7 @@ function FilmPage(props) {
 						<br />
 						Vote count: {vote_count}
 					</Rating>
-					{isFavorite ? (
-						<RemoveFromFav onClick={ToggleFav}>Remove from fav</RemoveFromFav>
-					) : (
-						<AddToFav onClick={ToggleFav}>Add to favorite</AddToFav>
-					)}
+					<FavoriteButton id={id} />
 					<Genres>
 						Genres:
 						{genresLinks}
