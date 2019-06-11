@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
-import films from './films'
+import filmsBest from './filmsBest'
 import movie from './movie'
-import searchFilms from './searchFilms'
-import favorites from './favorites'
+import filmsSearch from './filmsSearch'
+import favoriteIds from './favoriteIds'
+import filmsFavorite from './filmsFavorite'
 
 export default combineReducers({
-	films,
+	filmsBest,
 	movie,
-	searchFilms,
-	favorites,
+	filmsSearch,
+	favoriteIds,
+	filmsFavorite,
 })

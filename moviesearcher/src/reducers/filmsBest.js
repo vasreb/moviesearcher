@@ -1,9 +1,8 @@
 import {
-	GET_SEARCH_REQUEST,
-	GET_SEARCH_SUCCESS,
-	GET_SEARCH_ERROR,
-	CHANGE_SEARCH_QUERY,
-	NEW_SEARCH_REQUEST,
+	GET_BEST_REQUEST,
+	GET_BEST_SUCCESS,
+	GET_BEST_ERROR,
+	NEW_BEST_REQUEST,
 } from '../constants/constants'
 
 export const init = {
@@ -15,18 +14,17 @@ export const init = {
 	data: [],
 	totalPages: null,
 	currentPage: 1,
-	query: '',
 }
 
-export default function searchFilms(state = init, action) {
+export default function filmsBest(state = init, action) {
 	switch (action.type) {
-		case NEW_SEARCH_REQUEST:
+		case NEW_BEST_REQUEST:
 			return {
 				...state,
-				data: [],
 				currentPage: 1,
+				data: [],
 			}
-		case GET_SEARCH_REQUEST:
+		case GET_BEST_REQUEST:
 			return {
 				...state,
 				isLoading: true,
@@ -35,7 +33,7 @@ export default function searchFilms(state = init, action) {
 					error: null,
 				},
 			}
-		case GET_SEARCH_SUCCESS:
+		case GET_BEST_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
@@ -43,7 +41,7 @@ export default function searchFilms(state = init, action) {
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_SEARCH_ERROR:
+		case GET_BEST_ERROR:
 			return {
 				...state,
 				isError: true,
@@ -51,11 +49,6 @@ export default function searchFilms(state = init, action) {
 					isError: true,
 					error: action.payload,
 				},
-			}
-		case CHANGE_SEARCH_QUERY:
-			return {
-				...state,
-				query: action.payload,
 			}
 		default:
 			return state

@@ -8,6 +8,7 @@ const Best = React.lazy(() => import('./../containers/Best.jsx'))
 const Page404 = React.lazy(() => import('./Page404.jsx'))
 const FilmPage = React.lazy(() => import('./FilmPage.jsx'))
 const Search = React.lazy(() => import('./../containers/Search.jsx'))
+const Favorites = React.lazy(() => import('./../containers/Favorites.jsx'))
 
 const AppWrapper = styled.div`
 	background-color: Snow;
@@ -31,7 +32,7 @@ function App() {
 						<Route exact path="/404" component={Page404} />
 						<Route exact path="/film/:id" component={FilmPage} />
 						<Route exact path="/best" component={Best} />
-						<Route exact path="/favorite" component={Best} />
+						<Route exact path="/favorites" component={Favorites} />
 						<Route exact path="/search" component={Search} />
 					</Switch>
 				</Suspense>

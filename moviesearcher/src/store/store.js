@@ -6,8 +6,8 @@ import { save, load } from 'redux-localstorage-simple'
 
 const store = createStore(
 	main,
-	load({ states: ['favorites'] }),
-	applyMiddleware(thunk, logger, save({ states: ['favorites'] }))
+	load({ states: ['favoriteIds'] }),
+	applyMiddleware(thunk, logger, save({ states: ['favoriteIds'] }))
 )
 
 export default store

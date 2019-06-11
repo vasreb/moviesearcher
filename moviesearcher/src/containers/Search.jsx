@@ -3,9 +3,9 @@ import fetchSearchFilms from '../actions/fetchSearchFilms.js'
 import FilmList from '../components/FilmList.jsx'
 
 const mapStateToProps = state => {
-	const { searchFilms } = state
+	const { filmsSearch } = state
 	return {
-		searchFilms,
+		filmsSearch,
 	}
 }
 
@@ -17,15 +17,15 @@ const mapDispatchToProps = dispatch => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const { dispatch } = dispatchProps
-	const { searchFilms } = stateProps
-	const { query, currentPage } = searchFilms
+	const { filmsSearch } = stateProps
+	const { query, currentPage } = filmsSearch
 	const fetchData = () => {
 		dispatch(fetchSearchFilms(currentPage, query))
 	}
 	return {
 		...ownProps,
 		fetchData,
-		films: searchFilms,
+		films: filmsSearch,
 	}
 }
 

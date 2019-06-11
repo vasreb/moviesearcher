@@ -9,9 +9,7 @@ import Axios from '../constants/axios'
 import store from '../store/store'
 
 export default function fetchSearchFilms() {
-	console.log(store.getState())
-	const { currentPage: page, query } = store.getState().searchFilms
-	if (query.length === 0) return { type: null }
+	const { currentPage: page, query } = store.getState().filmsSearch
 	return async dispatch => {
 		dispatch({
 			type: GET_SEARCH_REQUEST,

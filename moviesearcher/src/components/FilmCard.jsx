@@ -74,14 +74,12 @@ const StyledLink = styled(Link)`
 `
 
 export default function Film(props) {
-	const { id, overview, title } = props.film
+	const { id, overview, title, posterUrl } = props.film
 	return (
 		<StyledLink to={`/film/${id}`}>
 			<FilmCard
 				style={{
-					backgroundImage: `url(https://image.tmdb.org/t/p/w500${
-						props.film.posterUrl
-					})`,
+					backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterUrl})`,
 				}}
 			>
 				<Name>{title}</Name>

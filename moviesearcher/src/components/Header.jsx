@@ -129,9 +129,9 @@ function Header(props) {
 }
 
 const mapStateToProps = state => {
-	const { searchFilms } = state
+	const { filmsSearch } = state
 	return {
-		searchFilms,
+		filmsSearch,
 	}
 }
 const mapDispatchToProps = dispatch => {
@@ -141,8 +141,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { searchFilms } = stateProps
-	const { isLoading, query } = searchFilms
+	const { filmsSearch } = stateProps
+	const { isLoading, query } = filmsSearch
 	return {
 		...stateProps,
 		...dispatchProps,

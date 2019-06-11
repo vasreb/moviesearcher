@@ -1,31 +1,17 @@
 import {
-	GET_FILMS_REQUEST,
-	GET_FILMS_SUCCESS,
-	GET_FILMS_ERROR,
+	GET_BEST_REQUEST,
+	GET_BEST_SUCCESS,
+	GET_BEST_ERROR,
 } from '../constants/constants'
 
 import Axios from '../constants/axios'
 
 // import store from '../store/store'
 
-export default function fetchTopFilms(page = 1) {
-	// //mode
-	// const { currentMode } = store.getState()
-	// let link
-	// switch (currentMode) {
-	// 	case 'top_rated':
-	// 		link = `/movie/top_rated?api_key=9d923168206684ddbd944abae426483e`
-	// 		break
-	// 	case 'search':
-	// 		if (query.length === 0) return { type: null }
-	// 		link = `/search/movie?api_key=9d923168206684ddbd944abae426483e&query=${encodeURIComponent(
-	// 			query
-	// 		)}`
-	// }
-
+export default function fetchBestFilms(page = 1) {
 	return async dispatch => {
 		dispatch({
-			type: GET_FILMS_REQUEST,
+			type: GET_BEST_REQUEST,
 		})
 		try {
 			let res = await Axios.get(
@@ -44,7 +30,7 @@ export default function fetchTopFilms(page = 1) {
 					}
 				})
 				dispatch({
-					type: GET_FILMS_SUCCESS,
+					type: GET_BEST_SUCCESS,
 					payload: {
 						data: res,
 						totalPages: total_pages,
@@ -55,7 +41,7 @@ export default function fetchTopFilms(page = 1) {
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_FILMS_ERROR,
+				type: GET_BEST_ERROR,
 				payload: +err.message,
 			})
 		}

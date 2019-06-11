@@ -31,9 +31,9 @@ function FavoriteButton(props) {
 }
 
 const mapStateToProps = state => {
-	const { favorites } = state
+	const { favoriteIds } = state
 	return {
-		favorites,
+		favoriteIds,
 	}
 }
 
@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const { dispatch } = dispatchProps
-	const { favorites } = stateProps
+	const { favoriteIds } = stateProps
 	const { id } = ownProps
 
 	const AddToFavorite = () => {
@@ -56,7 +56,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		dispatch(delFav(id))
 	}
 
-	const isFavorite = favorites.data.includes(id)
+	const isFavorite = favoriteIds.data.includes(id)
 
 	return {
 		AddToFavorite,
