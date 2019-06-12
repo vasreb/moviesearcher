@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import FilmCard from './FilmCard'
 import InfiniteScroll from 'react-infinite-scroller'
 import PropTypes from 'prop-types'
-import Page404 from './Page404.jsx'
+import ErrorPage from './ErrorPage.jsx'
 
 const FilmsWrapper = styled.ul`
 	list-style: none;
@@ -38,11 +38,11 @@ export default function FilmList(props) {
 			})
 		return <FilmsWrapper>{filmCards.concat(Preloader)}</FilmsWrapper>
 	}
+	if (error.isError) {
+		return <ErrorPage error={error.error} />
+	}
 	if (filmCards.length === 0) {
 		return <EmptyPlaceholder>{props.placeholder}</EmptyPlaceholder>
-	}
-	if (error.isError) {
-		return <Page404 error={error.error} />
 	}
 	return (
 		<InfiniteScroll

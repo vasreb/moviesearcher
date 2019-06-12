@@ -7,7 +7,7 @@ import fetchMovie from './../actions/fetchMovie.js'
 import FavoriteButton from './FavoriteButton'
 import Skeleton from 'react-loading-skeleton'
 import PropTypes from 'prop-types'
-import Page404 from './Page404.jsx'
+import ErrorPage from './ErrorPage.jsx'
 
 const FilmWrapper = styled.div`
 	margin: 0 auto;
@@ -130,7 +130,7 @@ function FilmPage(props) {
 	const { data, isLoading, error } = props.movie
 	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
 	if (error.isError) {
-		return <Page404 error={error.error} />
+		return <ErrorPage error={error.error} />
 	}
 	if (isLoading) {
 		return (

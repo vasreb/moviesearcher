@@ -6,7 +6,7 @@ import HeaderContainer from './../containers/HeaderContainer'
 import ReactLoading from 'react-loading'
 
 const Best = React.lazy(() => import('./../containers/Best.jsx'))
-const Page404 = React.lazy(() => import('./Page404.jsx'))
+const ErrorPage = React.lazy(() => import('./ErrorPage.jsx'))
 const FilmPage = React.lazy(() => import('./FilmPage.jsx'))
 const Search = React.lazy(() => import('./../containers/Search.jsx'))
 const Favorites = React.lazy(() => import('./../containers/Favorites.jsx'))
@@ -44,7 +44,7 @@ function App() {
 				>
 					<Switch>
 						<Route exact path="/" component={Best} />
-						<Route exact path="/404" component={Page404} />
+						<Route exact path="/404" component={ErrorPage} />
 						<Route exact path="/film/:id" component={FilmPage} />
 						<Route exact path="/best" component={Best} />
 						<Route exact path="/favorites" component={Favorites} />

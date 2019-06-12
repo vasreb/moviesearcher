@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Wrapper404 = styled.div`
 	margin: 0 auto;
@@ -22,7 +23,7 @@ const SoLittle404 = styled(Little404)`
 	font-style: italic;
 `
 
-export default function Page404(props) {
+export default function ErrorPage(props) {
 	return (
 		<Wrapper404>
 			<Big404>Sorry</Big404>
@@ -30,4 +31,8 @@ export default function Page404(props) {
 			<SoLittle404>{props.error}</SoLittle404>
 		</Wrapper404>
 	)
+}
+
+ErrorPage.propTypes = {
+	error: PropTypes.string,
 }
