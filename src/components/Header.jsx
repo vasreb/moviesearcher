@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import HeaderSearchContainer from './../containers/HeaderSearchContainer.jsx'
 
 const HeaderWrapper = styled.header`
 	position: sticky;
@@ -68,21 +68,7 @@ const HeaderItemSearch = styled(HeaderItem)`
 	}
 `
 
-const Search = styled.input`
-	width: 300px;
-	height: 50%;
-	background-color: #4871a0;
-	color: Snow;
-	border-radius: 20px;
-	border: 2px solid #334860;
-	@media (max-width: 800px) {
-		flex-shrink: 1;
-		width: auto;
-	}
-`
-
 export default function Header(props) {
-	const { query, handleSearch } = props
 	return (
 		<HeaderWrapper>
 			<HeaderList>
@@ -90,7 +76,7 @@ export default function Header(props) {
 					<Logo>JustMovieSearcher</Logo>
 				</StyledLink>
 				<HeaderItemSearch>
-					<Search onChange={e => handleSearch(e)} value={query} />
+					<HeaderSearchContainer />
 				</HeaderItemSearch>
 				<HeaderItem>
 					<StyledLink to="/best">Best</StyledLink>
@@ -101,9 +87,4 @@ export default function Header(props) {
 			</HeaderList>
 		</HeaderWrapper>
 	)
-}
-
-Header.propTypes = {
-	query: PropTypes.string,
-	handleSearch: PropTypes.func.isRequired,
 }

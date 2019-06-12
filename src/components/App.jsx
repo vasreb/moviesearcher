@@ -2,7 +2,7 @@ import React from 'react'
 import { Suspense } from 'react'
 import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
-import HeaderContainer from './../containers/HeaderContainer'
+import Header from './../components/Header'
 import ReactLoading from 'react-loading'
 
 const Best = React.lazy(() => import('./../containers/Best.jsx'))
@@ -33,7 +33,7 @@ const CenterLoadingWrapper = styled.div`
 function App() {
 	return (
 		<AppWrapper>
-			<HeaderContainer />
+			<Header />
 			<MainWrapper>
 				<Suspense
 					fallback={

@@ -18,9 +18,8 @@ const mapDispatchToProps = dispatch => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const { dispatch } = dispatchProps
 	const { filmsSearch } = stateProps
-	const { query, currentPage } = filmsSearch
 	const fetchData = () => {
-		dispatch(fetchSearchFilms(currentPage, query))
+		dispatch(fetchSearchFilms())
 	}
 	const placeholder = "Let's search something!"
 	return {
