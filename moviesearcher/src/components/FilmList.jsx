@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import FilmCard from './FilmCard'
 import InfiniteScroll from 'react-infinite-scroller'
+import PropTypes from 'prop-types'
+import Page404 from './Page404.jsx'
 
 const FilmsWrapper = styled.ul`
 	list-style: none;
@@ -15,6 +17,10 @@ const FilmsWrapper = styled.ul`
 		grid-template-columns: 1fr;
 	}
 `
+const EmptyPlaceholder = styled.h2`
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 30px;
+`
 
 export default function FilmList(props) {
 	const { fetchData, films } = props
@@ -24,8 +30,19 @@ export default function FilmList(props) {
 			<FilmCard film={film} />
 		</li>
 	))
+	if (isLoading) {
+		const Preloader = Array(10)
+			.fill(1)
+			.map((a, index) => {
+				return <FilmCard key={index} preload />
+			})
+		return <FilmsWrapper>{filmCards.concat(Preloader)}</FilmsWrapper>
+	}
+	if (filmCards.length === 0) {
+		return <EmptyPlaceholder>{props.placeholder}</EmptyPlaceholder>
+	}
 	if (error.isError) {
-		return <div>Error: {error.error}</div>
+		return <Page404 error={error.error} />
 	}
 	return (
 		<InfiniteScroll
@@ -38,4 +55,19 @@ export default function FilmList(props) {
 			<FilmsWrapper>{filmCards}</FilmsWrapper>
 		</InfiniteScroll>
 	)
+}
+
+FilmList.propTypes = {
+	fetchData: PropTypes.func.isRequired,
+	films: PropTypes.shape({
+		data: PropTypes.array.isRequired,
+		isLoading: PropTypes.bool.isRequired,
+		error: PropTypes.shape({
+			error: PropTypes.any,
+			isError: PropTypes.bool.isRequired,
+		}),
+		currentPage: PropTypes.number.isRequired,
+		totalPages: PropTypes.number,
+	}),
+	placeholder: PropTypes.string,
 }

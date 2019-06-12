@@ -42,7 +42,7 @@ export default function fetchBestFilms(page = 1) {
 		} catch (err) {
 			dispatch({
 				type: GET_BEST_ERROR,
-				payload: +err.message,
+				payload: err.message,
 			})
 		}
 	}

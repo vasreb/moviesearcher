@@ -22,10 +22,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const fetchData = () => {
 		dispatch(fetchSearchFilms(currentPage, query))
 	}
+	const placeholder = "Let's search something!"
 	return {
 		...ownProps,
 		fetchData,
 		films: filmsSearch,
+		placeholder,
 	}
 }
 

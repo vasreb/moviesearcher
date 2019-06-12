@@ -28,7 +28,7 @@ export default function fetchFavoriteCard(id) {
 		} catch (err) {
 			dispatch({
 				type: GET_FAV_FILM_ERROR,
-				payload: +err.message,
+				payload: err.message,
 			})
 		}
 	}

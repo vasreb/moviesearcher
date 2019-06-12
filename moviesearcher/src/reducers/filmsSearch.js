@@ -47,6 +47,7 @@ export default function filmsSearch(state = init, action) {
 			return {
 				...state,
 				isError: true,
+				isLoading: false,
 				error: {
 					isError: true,
 					error: action.payload,

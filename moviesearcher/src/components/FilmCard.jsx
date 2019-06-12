@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import Skeleton from 'react-loading-skeleton'
 
 const FilmCard = styled.div`
 	position: relative;
@@ -74,6 +76,16 @@ const StyledLink = styled(Link)`
 `
 
 export default function Film(props) {
+	const { preload } = props
+	if (preload) {
+		return (
+			<StyledLink to={'/'}>
+				<FilmCard>
+					<Skeleton height={533} />
+				</FilmCard>
+			</StyledLink>
+		)
+	}
 	const { id, overview, title, posterUrl } = props.film
 	return (
 		<StyledLink to={`/film/${id}`}>
@@ -87,4 +99,14 @@ export default function Film(props) {
 			</FilmCard>
 		</StyledLink>
 	)
+}
+
+Film.propTypes = {
+	film: PropTypes.shape({
+		posterUrl: PropTypes.string,
+		title: PropTypes.string.isRequired,
+		overview: PropTypes.string.isRequired,
+		id: PropTypes.number,
+	}),
+	preload: PropTypes.bool,
 }

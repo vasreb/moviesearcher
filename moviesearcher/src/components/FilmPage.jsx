@@ -1,10 +1,13 @@
 import React from 'react'
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import fetchMovie from './../actions/fetchMovie.js'
 import FavoriteButton from './FavoriteButton'
+import Skeleton from 'react-loading-skeleton'
+import PropTypes from 'prop-types'
+import Page404 from './Page404.jsx'
 
 const FilmWrapper = styled.div`
 	margin: 0 auto;
@@ -127,10 +130,26 @@ function FilmPage(props) {
 	const { data, isLoading, error } = props.movie
 	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
 	if (error.isError) {
-		return <Redirect to="/404" />
+		return <Page404 error={error.error} />
 	}
 	if (isLoading) {
-		return <h2>Loading...</h2>
+		return (
+			<FilmWrapper>
+				<Primary>
+					<Poster>
+						<Skeleton height={533} />
+					</Poster>
+					<Description>
+						<Name>
+							<Skeleton height={30} width={200} />
+						</Name>
+						<Overview>
+							<Skeleton count={15} width={400} />
+						</Overview>
+					</Description>
+				</Primary>
+			</FilmWrapper>
+		)
 	}
 	const {
 		title,
@@ -188,6 +207,17 @@ function FilmPage(props) {
 			</Secondary>
 		</FilmWrapper>
 	)
+}
+
+FilmPage.propTypes = {
+	movie: PropTypes.shape({
+		data: PropTypes.object.isRequired,
+		isLoading: PropTypes.bool.isRequired,
+		error: PropTypes.shape({
+			error: PropTypes.any,
+			isError: PropTypes.bool.isRequired,
+		}),
+	}),
 }
 
 const mapStateToProps = state => {

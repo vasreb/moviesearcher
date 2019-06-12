@@ -37,6 +37,7 @@ export default function filmsFavorite(state = init, action) {
 			return {
 				...state,
 				isError: true,
+				isLoading: false,
 				error: {
 					isError: true,
 					error: action.payload,

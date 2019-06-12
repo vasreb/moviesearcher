@@ -1,13 +1,7 @@
 import React from 'react'
-import { useRef } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import fetchSearchFilms from '../actions/fetchSearchFilms'
-import changeSearchQuery from './../actions/changeSearchQuery'
-import newSearchRequest from './../actions/newSearchRequest'
-
-import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const HeaderWrapper = styled.header`
 	position: sticky;
@@ -87,35 +81,16 @@ const Search = styled.input`
 	}
 `
 
-function Header(props) {
-	let timer = useRef()
-	const { dispatch, isLoading } = props
-	const handleSearch = async e => {
-		clearTimeout(timer.current)
-		e.persist()
-		if (window.location.pathname !== '/search') {
-			props.history.push('/search')
-		}
-		const LoadData = async () => {
-			if (isLoading) {
-				timer.current = setTimeout(LoadData, 1000)
-			}
-			if (e.target.value.length > 0) {
-				await dispatch(newSearchRequest())
-				await dispatch(fetchSearchFilms())
-			}
-		}
-		await dispatch(changeSearchQuery(e.target.value))
-		timer.current = setTimeout(LoadData, 1000)
-	}
+export default function Header(props) {
+	const { query, handleSearch } = props
 	return (
 		<HeaderWrapper>
 			<HeaderList>
 				<StyledLink to="/best">
-					<Logo>MovieSearcher</Logo>
+					<Logo>JustMovieSearcher</Logo>
 				</StyledLink>
 				<HeaderItemSearch>
-					<Search onChange={handleSearch} value={props.query} />
+					<Search onChange={e => handleSearch(e)} value={query} />
 				</HeaderItemSearch>
 				<HeaderItem>
 					<StyledLink to="/best">Best</StyledLink>
@@ -128,32 +103,7 @@ function Header(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	const { filmsSearch } = state
-	return {
-		filmsSearch,
-	}
+Header.propTypes = {
+	query: PropTypes.string,
+	handleSearch: PropTypes.func.isRequired,
 }
-const mapDispatchToProps = dispatch => {
-	return {
-		dispatch,
-	}
-}
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { filmsSearch } = stateProps
-	const { isLoading, query } = filmsSearch
-	return {
-		...stateProps,
-		...dispatchProps,
-		...ownProps,
-		isLoading,
-		query,
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-	mergeProps
-)(withRouter(Header))

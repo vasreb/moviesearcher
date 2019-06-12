@@ -2,7 +2,8 @@ import React from 'react'
 import { Suspense } from 'react'
 import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
-import Header from './Header.jsx'
+import HeaderContainer from './../containers/HeaderContainer'
+import ReactLoading from 'react-loading'
 
 const Best = React.lazy(() => import('./../containers/Best.jsx'))
 const Page404 = React.lazy(() => import('./Page404.jsx'))
@@ -20,13 +21,27 @@ const MainWrapper = styled.main`
 	width: 100%;
 	height: 100%;
 `
+const CenterLoadingWrapper = styled.div`
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
 
 function App() {
 	return (
 		<AppWrapper>
-			<Header />
+			<HeaderContainer />
 			<MainWrapper>
-				<Suspense fallback="loading">
+				<Suspense
+					fallback={
+						<CenterLoadingWrapper>
+							<ReactLoading type="bubbles" color="black" />
+						</CenterLoadingWrapper>
+					}
+				>
 					<Switch>
 						<Route exact path="/" component={Best} />
 						<Route exact path="/404" component={Page404} />

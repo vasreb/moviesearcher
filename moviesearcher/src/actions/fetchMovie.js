@@ -27,7 +27,7 @@ export default function fetchMovie(id) {
 		} catch (err) {
 			dispatch({
 				type: GET_MOVIE_ERROR,
-				payload: +err.message,
+				payload: err.message,
 			})
 		}
 	}

@@ -13,15 +13,21 @@ const Big404 = styled.h2`
 `
 
 const Little404 = styled.p`
-	font-size: 20px;
+	font-size: 40px;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+`
+
+const SoLittle404 = styled(Little404)`
+	font-size: 15px;
+	font-style: italic;
 `
 
 export default function Page404(props) {
 	return (
 		<Wrapper404>
-			<Big404>404</Big404>
-			<Little404>Sorry, this page doesn't exist</Little404>
+			<Big404>Sorry</Big404>
+			<Little404>Something gone wrong</Little404>
+			<SoLittle404>{props.error}</SoLittle404>
 		</Wrapper404>
 	)
 }

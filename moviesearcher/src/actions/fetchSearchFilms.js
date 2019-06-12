@@ -45,7 +45,7 @@ export default function fetchSearchFilms() {
 		} catch (err) {
 			dispatch({
 				type: GET_SEARCH_ERROR,
-				payload: +err.message,
+				payload: err.message,
 			})
 		}
 	}
