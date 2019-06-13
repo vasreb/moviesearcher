@@ -56,6 +56,7 @@ const ClickCatcher = styled.div`
 	top: -3000px;
 	left: -3000px;
 	background: rgb(0, 0, 0, 0.2);
+	z-index: 99999;
 `
 const Genres = styled.form`
 	display: flex;
@@ -115,6 +116,7 @@ const Sort = styled(Genre)`
 	}
 `
 const DirectionLabel = styled(GenreLabel)`
+	margin-left: 0;
 	&::before {
 		display: none;
 	}
