@@ -1,7 +1,7 @@
 import {
 	GET_BEST_REQUEST,
 	GET_BEST_SUCCESS,
-	GET_BEST_ERROR,
+	GET_ERROR,
 	API_KEY,
 } from '../constants/constants'
 
@@ -42,7 +42,7 @@ export default function fetchBestFilms(page = 1) {
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_BEST_ERROR,
+				type: GET_ERROR,
 				payload: err.message,
 			})
 		}

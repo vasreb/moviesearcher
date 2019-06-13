@@ -7,8 +7,8 @@ import { FilmsWrapper, EmptyListPlaceholder } from './style.js'
 import ReactLoading from 'react-loading'
 
 export default function FilmList(props) {
-	const { fetchData, films } = props
-	const { data, isLoading, error, currentPage, totalPages } = films
+	const { fetchData, films, error } = props
+	const { data, isLoading, currentPage, totalPages } = films
 	const filmCards = data.map(film => (
 		<li key={film.id}>
 			<FilmCard film={film} />

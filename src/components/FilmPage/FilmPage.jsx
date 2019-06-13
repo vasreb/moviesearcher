@@ -22,7 +22,8 @@ import {
 } from './style.js'
 
 function FilmPage(props) {
-	const { data, isLoading, error } = props.movie
+	const { error } = props
+	const { data, isLoading } = props.movie
 	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
 	if (error.isError) {
 		return <ErrorPage error={error.error} />
@@ -116,9 +117,10 @@ FilmPage.propTypes = {
 }
 
 const mapStateToProps = state => {
-	const { movie } = state
+	const { movie, error } = state
 	return {
 		movie,
+		error,
 	}
 }
 

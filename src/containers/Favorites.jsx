@@ -6,10 +6,11 @@ import clearFavorites from '../actions/clearFavorites.js'
 import FilmList from '../components/FilmList/FilmList.jsx'
 
 const mapStateToProps = state => {
-	const { favoriteIds, filmsFavorite } = state
+	const { favoriteIds, filmsFavorite, error } = state
 	return {
 		favoriteIds,
 		filmsFavorite,
+		error,
 	}
 }
 
@@ -20,7 +21,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { filmsFavorite, favoriteIds } = stateProps
+	const { filmsFavorite, favoriteIds, error } = stateProps
 	const { dispatch } = dispatchProps
 	const fetchData = () => {
 		favoriteIds.data
@@ -36,6 +37,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		fetchData,
 		films: filmsFavorite,
 		clearFavs,
+		error,
 	}
 }
 

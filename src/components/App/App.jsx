@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
 import ReactLoading from 'react-loading'
 import { AppWrapper, MainWrapper, CenterLoadingWrapper } from './style.js'
+import ErrorPage from '../ErrorPage/ErrorPage.jsx'
 
 const Best = React.lazy(() => import('../../containers/Best.jsx'))
-const ErrorPage = React.lazy(() => import('../ErrorPage/ErrorPage.jsx'))
 const FilmPage = React.lazy(() => import('../FilmPage/FilmPage.jsx'))
 const Search = React.lazy(() => import('../../containers/Search.jsx'))
 const Favorites = React.lazy(() => import('../../containers/Favorites.jsx'))

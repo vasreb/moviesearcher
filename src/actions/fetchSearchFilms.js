@@ -1,7 +1,7 @@
 import {
 	GET_SEARCH_REQUEST,
 	GET_SEARCH_SUCCESS,
-	GET_SEARCH_ERROR,
+	GET_ERROR,
 	QUERY,
 	FILTER,
 	ASC,
@@ -56,7 +56,7 @@ export default function fetchSearchFilms() {
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_SEARCH_ERROR,
+				type: GET_ERROR,
 				payload: err.message,
 			})
 		}

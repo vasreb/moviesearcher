@@ -1,15 +1,11 @@
 import {
 	GET_FAV_FILM_REQUEST,
 	GET_FAV_FILM_SUCCESS,
-	GET_FAV_FILM_ERROR,
+	GET_ERROR,
 	CLEAR_FAVS,
 } from '../constants/constants'
 
 export const init = {
-	error: {
-		isError: false,
-		error: null,
-	},
 	isLoading: false,
 	data: [],
 	totalPages: -1,
@@ -22,10 +18,6 @@ export default function filmsFavorite(state = init, action) {
 			return {
 				...state,
 				isLoading: true,
-				error: {
-					isError: false,
-					error: null,
-				},
 			}
 		case GET_FAV_FILM_SUCCESS:
 			return {
@@ -33,15 +25,10 @@ export default function filmsFavorite(state = init, action) {
 				isLoading: false,
 				data: state.data.concat(action.payload),
 			}
-		case GET_FAV_FILM_ERROR:
+		case GET_ERROR:
 			return {
 				...state,
-				isError: true,
 				isLoading: false,
-				error: {
-					isError: true,
-					error: action.payload,
-				},
 			}
 		case CLEAR_FAVS:
 			return {

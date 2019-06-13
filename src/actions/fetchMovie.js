@@ -1,7 +1,7 @@
 import {
 	GET_MOVIE_REQUEST,
 	GET_MOVIE_SUCCESS,
-	GET_MOVIE_ERROR,
+	GET_ERROR,
 	API_KEY,
 } from './../constants/constants'
 
@@ -25,7 +25,7 @@ export default function fetchMovie(id) {
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_MOVIE_ERROR,
+				type: GET_ERROR,
 				payload: err.message,
 			})
 		}

@@ -1,15 +1,11 @@
 import {
 	GET_BEST_REQUEST,
 	GET_BEST_SUCCESS,
-	GET_BEST_ERROR,
+	GET_ERROR,
 	NEW_BEST_REQUEST,
 } from '../constants/constants'
 
 export const init = {
-	error: {
-		isError: false,
-		error: null,
-	},
 	isLoading: false,
 	data: [],
 	totalPages: null,
@@ -28,10 +24,6 @@ export default function filmsBest(state = init, action) {
 			return {
 				...state,
 				isLoading: true,
-				error: {
-					isError: false,
-					error: null,
-				},
 			}
 		case GET_BEST_SUCCESS:
 			return {
@@ -41,15 +33,10 @@ export default function filmsBest(state = init, action) {
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_BEST_ERROR:
+		case GET_ERROR:
 			return {
 				...state,
-				isError: true,
 				isLoading: false,
-				error: {
-					isError: true,
-					error: action.payload,
-				},
 			}
 		default:
 			return state

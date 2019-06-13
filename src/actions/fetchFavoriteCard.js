@@ -1,7 +1,7 @@
 import {
 	GET_FAV_FILM_REQUEST,
 	GET_FAV_FILM_SUCCESS,
-	GET_FAV_FILM_ERROR,
+	GET_ERROR,
 	API_KEY,
 } from './../constants/constants'
 
@@ -26,7 +26,7 @@ export default function fetchFavoriteCard(id) {
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_FAV_FILM_ERROR,
+				type: GET_ERROR,
 				payload: err.message,
 			})
 		}

@@ -1,15 +1,11 @@
 import {
 	GET_SEARCH_REQUEST,
 	GET_SEARCH_SUCCESS,
-	GET_SEARCH_ERROR,
+	GET_ERROR,
 	NEW_SEARCH_REQUEST,
 } from '../constants/constants'
 
 export const init = {
-	error: {
-		isError: false,
-		error: null,
-	},
 	isLoading: false,
 	data: [],
 	totalPages: null,
@@ -28,10 +24,6 @@ export default function filmsSearch(state = init, action) {
 			return {
 				...state,
 				isLoading: true,
-				error: {
-					isError: false,
-					error: null,
-				},
 			}
 		case GET_SEARCH_SUCCESS:
 			return {
@@ -41,15 +33,10 @@ export default function filmsSearch(state = init, action) {
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_SEARCH_ERROR:
+		case GET_ERROR:
 			return {
 				...state,
-				isError: true,
 				isLoading: false,
-				error: {
-					isError: true,
-					error: action.payload,
-				},
 			}
 		default:
 			return state

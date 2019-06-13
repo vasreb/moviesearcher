@@ -1,14 +1,10 @@
 import {
 	GET_MOVIE_REQUEST,
 	GET_MOVIE_SUCCESS,
-	GET_MOVIE_ERROR,
+	GET_ERROR,
 } from '../constants/constants'
 
 export const init = {
-	error: {
-		isError: false,
-		error: null,
-	},
 	isLoading: true,
 	data: {},
 	isFavorite: false,
@@ -32,14 +28,10 @@ export default function movie(state = init, action) {
 				isLoading: false,
 				data: action.payload,
 			}
-		case GET_MOVIE_ERROR:
+		case GET_ERROR:
 			return {
 				...state,
-				isError: true,
-				error: {
-					isError: true,
-					error: action.payload,
-				},
+				isLoading: false,
 			}
 		default:
 			return state

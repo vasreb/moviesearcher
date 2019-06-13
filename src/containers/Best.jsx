@@ -6,9 +6,10 @@ import newBestRequest from '../actions/newBestRequest.js'
 import FilmList from '../components/FilmList/FilmList.jsx'
 
 const mapStateToProps = state => {
-	const { filmsBest } = state
+	const { filmsBest, error } = state
 	return {
 		filmsBest,
+		error,
 	}
 }
 
@@ -19,7 +20,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { filmsBest } = stateProps
+	const { filmsBest, error } = stateProps
 	const { dispatch } = dispatchProps
 	const fetchData = () => {
 		dispatch(fetchBestFilms(filmsBest.currentPage))
@@ -32,6 +33,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		fetchData,
 		films: filmsBest,
 		resetBestPage,
+		error,
 	}
 }
 
