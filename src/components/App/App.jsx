@@ -1,34 +1,15 @@
 import React from 'react'
 import { Suspense } from 'react'
-import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
-import Header from './../components/Header'
+import Header from '../Header/Header'
 import ReactLoading from 'react-loading'
+import { AppWrapper, MainWrapper, CenterLoadingWrapper } from './style.js'
 
-const Best = React.lazy(() => import('./../containers/Best.jsx'))
-const ErrorPage = React.lazy(() => import('./ErrorPage.jsx'))
-const FilmPage = React.lazy(() => import('./FilmPage.jsx'))
-const Search = React.lazy(() => import('./../containers/Search.jsx'))
-const Favorites = React.lazy(() => import('./../containers/Favorites.jsx'))
-
-const AppWrapper = styled.div`
-	background-color: Snow;
-	height: 100%;
-	width: 100%;
-`
-const MainWrapper = styled.main`
-	position: relative;
-	width: 100%;
-	height: 100%;
-`
-const CenterLoadingWrapper = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`
+const Best = React.lazy(() => import('../../containers/Best.jsx'))
+const ErrorPage = React.lazy(() => import('../ErrorPage/ErrorPage.jsx'))
+const FilmPage = React.lazy(() => import('../FilmPage/FilmPage.jsx'))
+const Search = React.lazy(() => import('../../containers/Search.jsx'))
+const Favorites = React.lazy(() => import('../../containers/Favorites.jsx'))
 
 function App() {
 	return (

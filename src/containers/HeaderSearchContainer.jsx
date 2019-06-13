@@ -9,7 +9,7 @@ import fetchSearchFilms from '../actions/fetchSearchFilms'
 import changeSearchQuery from './../actions/changeSearchQuery'
 import newSearchRequest from './../actions/newSearchRequest'
 import { withRouter } from 'react-router-dom'
-import SearchHeader from './../components/SearchHeader'
+import SearchHeader from '../components/SearchHeader/SearchHeader'
 
 const mapStateToProps = state => {
 	const { genres, isAsc, query, sort } = state.filters
@@ -35,7 +35,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		await dispatch(newSearchRequest())
 		await dispatch(fetchSearchFilms())
 	}
-	const toggleGenre = async id => {
+	const handleToggleGenre = async id => {
 		if (genres.includes(id)) {
 			dispatch(delGenre(id))
 		} else {
@@ -51,7 +51,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		await dispatch(changeSortDirection())
 		await startSearch()
 	}
-	const handleSearch = async (e, timer) => {
+	const handleQuerySearch = async (e, timer) => {
 		clearTimeout(timer.current)
 		e.persist()
 		const LoadData = async () => {
@@ -71,19 +71,19 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		isAsc,
 		query,
 
-		toggleGenre,
-		handleSearch,
+		handleToggleGenre,
+		handleQuerySearch,
 		handleSortDirection,
 		handleChangeSort,
 	}
 }
 
 function HeaderSearchContainer(props) {
-	let timer = useRef()
-	const handleSearchWrap = e => {
-		props.handleSearch(e, timer)
+	let timer = useRef() //storage for search timer
+	const handleQuerySearchWrap = e => {
+		props.handleQuerySearch(e, timer)
 	}
-	return <SearchHeader {...props} handleSearch={handleSearchWrap} />
+	return <SearchHeader {...props} handleQuerySearch={handleQuerySearchWrap} />
 }
 
 export default withRouter(

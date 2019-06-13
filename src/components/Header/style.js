@@ -1,7 +1,5 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import HeaderSearchContainer from './../containers/HeaderSearchContainer.jsx'
 
 const HeaderWrapper = styled.header`
 	position: sticky;
@@ -11,6 +9,15 @@ const HeaderWrapper = styled.header`
 	border-bottom: 2px solid #446e99;
 	box-shadow: 0px 0px 10px 0px black;
 	z-index: 9999;
+	@media (max-width: 400px) {
+		height: 100px;
+	}
+	@media (max-width: 400px) {
+		top: 100px;
+		left: 0px;
+		position: static;
+		padding: 0px 20px;
+	}
 `
 
 const Logo = styled.p`
@@ -24,7 +31,7 @@ const Logo = styled.p`
 	@media (max-width: 800px) {
 		font-size: 20px;
 	}
-	@media (max-width: 500px) {
+	@media (max-width: 600px) {
 		display: none;
 	}
 `
@@ -39,6 +46,10 @@ const HeaderList = styled.ul`
 	@media (max-width: 800px) {
 		justify-content: space-between;
 	}
+	@media (max-width: 400px) {
+		flex-wrap: wrap;
+		align-content: center;
+	}
 `
 
 const HeaderItem = styled.li`
@@ -50,6 +61,11 @@ const HeaderItem = styled.li`
 	flex-direction: column;
 	justify-content: center;
 	border-bottom: 5px solid #161732;
+	@media (max-width: 400px) {
+		flex-wrap: wrap;
+		align-content: center;
+		flex-grow: 1;
+	}
 `
 const StyledLink = styled(Link)`
 	color: #fff;
@@ -61,30 +77,25 @@ const StyledLink = styled(Link)`
 `
 
 const HeaderItemSearch = styled(HeaderItem)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border-bottom: none;
 	margin-right: 200px;
 	@media (max-width: 1200px) {
 		margin-right: 0;
 	}
+	@media (max-width: 400px) {
+		min-width: 300px;
+		order: 3;
+	}
 `
 
-export default function Header(props) {
-	return (
-		<HeaderWrapper>
-			<HeaderList>
-				<StyledLink to="/best">
-					<Logo>JustMovieSearcher</Logo>
-				</StyledLink>
-				<HeaderItemSearch>
-					<HeaderSearchContainer />
-				</HeaderItemSearch>
-				<HeaderItem>
-					<StyledLink to="/best">Best</StyledLink>
-				</HeaderItem>
-				<HeaderItem>
-					<StyledLink to="/favorites">Favorites</StyledLink>
-				</HeaderItem>
-			</HeaderList>
-		</HeaderWrapper>
-	)
+export {
+	HeaderWrapper,
+	Logo,
+	HeaderList,
+	HeaderItem,
+	StyledLink,
+	HeaderItemSearch,
 }

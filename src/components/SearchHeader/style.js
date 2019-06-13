@@ -1,10 +1,4 @@
-import React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
-import PropTypes from 'prop-types'
-import genres from './../constants/genres.js'
-import sorts from './../constants/sorts.js'
-
 const SearchInput = styled.input`
 	width: 300px;
 	height: 25px;
@@ -12,15 +6,20 @@ const SearchInput = styled.input`
 	color: Snow;
 	border-radius: 20px;
 	border: 2px solid #334860;
+	font-family: Roboto, Open Sans, Helvetica Neue, sans-serif;
 	@media (max-width: 800px) {
 		flex-shrink: 1;
 		width: auto;
 	}
+	padding-left: 10px;
 `
 const SearchWrapper = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: row;
+	@media (max-width: 400px) {
+		position: static;
+	}
 `
 const ToggleOpen = styled.div`
 	position: relative;
@@ -42,6 +41,13 @@ const SearchOptionsWrap = styled.div`
 	border-radius: 10px;
 	display: block;
 	z-index: 9999999;
+	@media (max-width: 800px) {
+		width: auto;
+	}
+	@media (max-width: 400px) {
+		top: 100px;
+		left: 0px;
+	}
 `
 const ClickCatcher = styled.div`
 	position: fixed;
@@ -56,7 +62,6 @@ const Genres = styled.form`
 	flex-direction: column;
 	text-align: left;
 	font-size: 20px;
-	border: 1px solid black;
 	padding: 5px;
 `
 
@@ -92,8 +97,6 @@ const Genre = styled.input`
 `
 
 const Sorts = styled.div`
-	border: 1px solid black;
-	border-left: none;
 	padding: 5px;
 	text-align: left;
 	font-size: 20px;
@@ -125,77 +128,18 @@ const Direction = styled(Genre)`
 	}
 `
 
-export default function SearchHeader(props) {
-	const [isOpen, setOpen] = useState(false)
-	const {
-		handleSearch,
-		query,
-		toggleGenre,
-		doesContainGenre,
-		handleChangeSort,
-		isAsc,
-		handleSortDirection,
-		doesThisSort,
-	} = props
-	const genresInputs = genres.map(genre => (
-		<div key={genre.id}>
-			<Genre
-				id={genre.id}
-				type="checkbox"
-				value={genre.id}
-				onChange={() => toggleGenre(genre.id)}
-				checked={doesContainGenre(genre.id)}
-			/>
-			<GenreLabel htmlFor={genre.id}>{genre.name}</GenreLabel>
-		</div>
-	))
-	const sortsRadio = sorts.map(sort => (
-		<div key={sort.id}>
-			<Sort
-				type="radio"
-				onChange={handleChangeSort}
-				value={sort.id}
-				id={sort.id}
-				name="sort"
-				checked={doesThisSort(sort.id)}
-			/>
-			<SortLabel htmlFor={sort.id}>{sort.name}</SortLabel>
-		</div>
-	))
-	return (
-		<SearchWrapper>
-			<SearchInput
-				onChange={handleSearch}
-				onKeyDown={handleSearch}
-				value={query}
-			/>
-			<ToggleOpen
-				onClick={() => {
-					setOpen(!isOpen)
-				}}
-			>
-				{isOpen ? '△' : '▽'}
-			</ToggleOpen>
-			<ClickCatcher
-				onClick={() => {
-					setOpen(false)
-				}}
-				style={{ display: isOpen ? 'block' : 'none' }}
-			/>
-			<SearchOptionsWrap style={{ display: isOpen ? 'flex' : 'none' }}>
-				<Genres>{genresInputs}</Genres>
-				<Sorts>
-					{sortsRadio}
-					<Direction
-						type="checkbox"
-						onChange={handleSortDirection}
-						id="changeDirection"
-					/>
-					<DirectionLabel htmlFor="changeDirection">
-						Direction {isAsc ? '△' : '▽'}
-					</DirectionLabel>
-				</Sorts>
-			</SearchOptionsWrap>
-		</SearchWrapper>
-	)
+export {
+	SearchInput,
+	SearchWrapper,
+	ToggleOpen,
+	SearchOptionsWrap,
+	ClickCatcher,
+	Genres,
+	GenreLabel,
+	Genre,
+	Sorts,
+	SortLabel,
+	Sort,
+	DirectionLabel,
+	Direction,
 }

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import fetchBestFilms from '../actions/fetchBestFilms.js'
 import newBestRequest from '../actions/newBestRequest.js'
-import FilmList from '../components/FilmList.jsx'
+import FilmList from '../components/FilmList/FilmList.jsx'
 
 const mapStateToProps = state => {
 	const { filmsBest } = state

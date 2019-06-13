@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import fetchFavoriteCard from '../actions/fetchFavoriteCard.js'
 import clearFavorites from '../actions/clearFavorites.js'
-import FilmList from '../components/FilmList.jsx'
+import FilmList from '../components/FilmList/FilmList.jsx'
 
 const mapStateToProps = state => {
 	const { favoriteIds, filmsFavorite } = state

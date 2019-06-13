@@ -5,6 +5,7 @@ import filmsSearch from './filmsSearch'
 import favoriteIds from './favoriteIds'
 import filmsFavorite from './filmsFavorite'
 import filters from './filters'
+import searchMode from './searchMode'
 
 export default combineReducers({
 	filmsBest,
@@ -13,4 +14,5 @@ export default combineReducers({
 	favoriteIds,
 	filmsFavorite,
 	filters,
+	searchMode,
 })
