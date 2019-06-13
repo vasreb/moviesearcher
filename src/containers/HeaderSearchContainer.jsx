@@ -22,12 +22,15 @@ const mapDispatchToProps = dispatch => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	const { genres, isAsc, isLoading, query, sort } = stateProps
 	const { dispatch } = dispatchProps
+
 	const doesContainGenre = id => {
 		return genres.includes(id)
 	}
+
 	const doesThisSort = value => {
 		return sort.includes(value)
 	}
+
 	const startSearch = async () => {
 		if (window.location.pathname !== '/search') {
 			ownProps.history.push('/search')
@@ -35,6 +38,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		await dispatch(newSearchRequest())
 		await dispatch(fetchSearchFilms())
 	}
+
 	const handleToggleGenre = async id => {
 		if (genres.includes(id)) {
 			dispatch(delGenre(id))
@@ -43,14 +47,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		}
 		await startSearch()
 	}
+
 	const handleChangeSort = async e => {
 		await dispatch(changeSort(e.target.value))
 		await startSearch()
 	}
+
 	const handleSortDirection = async () => {
 		await dispatch(changeSortDirection())
 		await startSearch()
 	}
+
 	const handleQuerySearch = async (e, timer) => {
 		clearTimeout(timer.current)
 		e.persist()

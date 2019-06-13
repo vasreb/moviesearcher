@@ -3,7 +3,8 @@ import FilmCard from '../FilmCard/FilmCard'
 import InfiniteScroll from 'react-infinite-scroller'
 import PropTypes from 'prop-types'
 import ErrorPage from '../ErrorPage/ErrorPage.jsx'
-import { FilmsWrapper, EmptyPlaceholder } from './style.js'
+import { FilmsWrapper, EmptyListPlaceholder } from './style.js'
+import ReactLoading from 'react-loading'
 
 export default function FilmList(props) {
 	const { fetchData, films } = props
@@ -25,14 +26,14 @@ export default function FilmList(props) {
 		return <ErrorPage error={error.error} />
 	}
 	if (filmCards.length === 0) {
-		return <EmptyPlaceholder>{props.placeholder}</EmptyPlaceholder>
+		return <EmptyListPlaceholder>{props.placeholder}</EmptyListPlaceholder>
 	}
 	return (
 		<InfiniteScroll
 			pageStart={0}
 			loadMore={() => fetchData()}
 			hasMore={isLoading ? false : currentPage <= totalPages ? true : false}
-			loader={<div key={-1}>wait...</div>}
+			loader={<ReactLoading key={-1} type="bubbles" color="black" />}
 			initialLoad={false}
 		>
 			<FilmsWrapper>{filmCards}</FilmsWrapper>

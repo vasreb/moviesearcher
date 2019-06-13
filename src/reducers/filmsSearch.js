@@ -3,7 +3,6 @@ import {
 	GET_SEARCH_SUCCESS,
 	GET_SEARCH_ERROR,
 	NEW_SEARCH_REQUEST,
-	CHANGE_SEARCH_QUERY,
 } from '../constants/constants'
 
 export const init = {
@@ -15,7 +14,6 @@ export const init = {
 	data: [],
 	totalPages: null,
 	currentPage: 1,
-	query: '',
 }
 
 export default function filmsSearch(state = init, action) {
@@ -52,11 +50,6 @@ export default function filmsSearch(state = init, action) {
 					isError: true,
 					error: action.payload,
 				},
-			}
-		case CHANGE_SEARCH_QUERY:
-			return {
-				...state,
-				query: action.payload,
 			}
 		default:
 			return state

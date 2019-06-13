@@ -3,15 +3,17 @@ import {
 	DEL_GENRE_ID,
 	CHANGE_SORT,
 	CHANGE_SORT_DIRECTION,
+	CHANGE_SEARCH_QUERY,
 } from '../constants/constants'
 
 export const init = {
 	genres: [],
 	sort: 'popularity',
 	isAsc: false,
+	query: '',
 }
 
-export default function currentGenres(state = init, action) {
+export default function filters(state = init, action) {
 	switch (action.type) {
 		case ADD_GENRE_ID:
 			return {
@@ -34,6 +36,11 @@ export default function currentGenres(state = init, action) {
 			return {
 				...state,
 				isAsc: !state.isAsc,
+			}
+		case CHANGE_SEARCH_QUERY:
+			return {
+				...state,
+				query: action.payload,
 			}
 		default:
 			return state

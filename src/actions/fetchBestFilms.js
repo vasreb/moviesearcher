@@ -2,6 +2,7 @@ import {
 	GET_BEST_REQUEST,
 	GET_BEST_SUCCESS,
 	GET_BEST_ERROR,
+	API_KEY,
 } from '../constants/constants'
 
 import Axios from '../constants/axios'
@@ -15,7 +16,7 @@ export default function fetchBestFilms(page = 1) {
 		})
 		try {
 			let res = await Axios.get(
-				`/movie/top_rated?api_key=9d923168206684ddbd944abae426483e&page=${page}`
+				`/movie/top_rated?api_key=${API_KEY}&page=${page}`
 			)
 			if (res.status === 200) {
 				res = res.data

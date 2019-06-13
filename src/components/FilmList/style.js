@@ -11,8 +11,8 @@ const FilmsWrapper = styled.ul`
 		grid-template-columns: 1fr;
 	}
 `
-const EmptyPlaceholder = styled.h2`
+const EmptyListPlaceholder = styled.h2`
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 30px;
 `
-export { FilmsWrapper, EmptyPlaceholder }
+export { FilmsWrapper, EmptyListPlaceholder }

@@ -1,9 +1,17 @@
+import {
+	POPULARITY,
+	RELEASE_DATE,
+	REVENUE,
+	VOTE_AVERAGE,
+	VOTE_COUNT,
+} from './constants'
+
 const sorts = [
-	{ name: 'Popularity', id: 'popularity' },
-	{ name: 'Date', id: 'release_date' },
-	{ name: 'Revenue', id: 'revenue' },
-	{ name: 'Vote average', id: 'vote_average' },
-	{ name: 'Vote count', id: 'vote_count' },
+	{ name: 'Popularity', id: POPULARITY },
+	{ name: 'Date', id: RELEASE_DATE },
+	{ name: 'Revenue', id: REVENUE },
+	{ name: 'Vote average', id: VOTE_AVERAGE },
+	{ name: 'Vote count', id: VOTE_COUNT },
 ]
 
 export default sorts

@@ -9,7 +9,7 @@ import {
 	HeaderItemSearch,
 } from './style'
 
-export default function Header(props) {
+export default function Header() {
 	return (
 		<HeaderWrapper>
 			<HeaderList>

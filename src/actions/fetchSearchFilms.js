@@ -4,6 +4,9 @@ import {
 	GET_SEARCH_ERROR,
 	QUERY,
 	FILTER,
+	ASC,
+	DESC,
+	API_KEY,
 } from '../constants/constants'
 
 import Axios from '../constants/axios'
@@ -11,17 +14,15 @@ import Axios from '../constants/axios'
 import store from '../store/store'
 
 export default function fetchSearchFilms() {
-	const { currentPage: page, query } = store.getState().filmsSearch
-	const { genres, sort, isAsc } = store.getState().filters
+	const { currentPage: page } = store.getState().filmsSearch
+	const { genres, sort, isAsc, query } = store.getState().filters
 	const mode = store.getState().searchMode
 	let link
 	if (mode === QUERY) {
-		link = `/search/movie?api_key=9d923168206684ddbd944abae426483e&query=${encodeURIComponent(
-			query
-		)}`
+		link = `/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
 	} else if (mode === FILTER) {
-		link = `/discover/movie?api_key=9d923168206684ddbd944abae426483e&vote_count.gte=200&sort_by=${sort}.${
-			isAsc ? 'asc' : 'desc'
+		link = `/discover/movie?api_key=${API_KEY}&vote_count.gte=200&sort_by=${sort}.${
+			isAsc ? ASC : DESC
 		}&with_genres=${genres.concat().join(',')}`
 	}
 
