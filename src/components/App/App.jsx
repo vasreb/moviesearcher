@@ -3,8 +3,9 @@ import { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
 import ReactLoading from 'react-loading'
-import { AppWrapper, MainWrapper, CenterLoadingWrapper } from './style.js'
+import { AppWrapper, CenterLoadingWrapper } from './style.js'
 import ErrorPage from '../ErrorPage/ErrorPage.jsx'
+import MainWrapperBoundary from '../MainWrapperBoundary/MainWrapperBoundary.jsx'
 
 const Best = React.lazy(() => import('../../containers/Best.jsx'))
 const FilmPage = React.lazy(() => import('../FilmPage/FilmPage.jsx'))
@@ -15,7 +16,7 @@ function App() {
 	return (
 		<AppWrapper>
 			<Header />
-			<MainWrapper>
+			<MainWrapperBoundary>
 				<Suspense
 					fallback={
 						<CenterLoadingWrapper>
@@ -32,7 +33,7 @@ function App() {
 						<Route exact path="/search" component={Search} />
 					</Switch>
 				</Suspense>
-			</MainWrapper>
+			</MainWrapperBoundary>
 		</AppWrapper>
 	)
 }

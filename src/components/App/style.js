@@ -5,11 +5,6 @@ const AppWrapper = styled.div`
 	height: 100%;
 	width: 100%;
 `
-const MainWrapper = styled.main`
-	position: relative;
-	width: 100%;
-	height: 100%;
-`
 const CenterLoadingWrapper = styled.div`
 	position: absolute;
 	width: 100%;
@@ -19,4 +14,4 @@ const CenterLoadingWrapper = styled.div`
 	align-items: center;
 `
 
-export { AppWrapper, MainWrapper, CenterLoadingWrapper }
+export { AppWrapper, CenterLoadingWrapper }
