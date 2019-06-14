@@ -21,11 +21,9 @@ export default function filters(state = init, action) {
 				genres: state.genres.concat(action.payload),
 			}
 		case DEL_GENRE_ID:
-			const index = state.genres.indexOf(action.payload)
-			state.genres.splice(index, 1)
 			return {
 				...state,
-				genres: [...state.genres],
+				genres: state.genres.filter(genre => genre !== action.payload),
 			}
 		case CHANGE_SORT:
 			return {
