@@ -30,6 +30,7 @@ export default function SearchHeader(props) {
 		isAsc,
 		handleSortDirection,
 		doesThisSort,
+		error,
 	} = props
 	const genresInputs = genres.map(genre => (
 		<div key={genre.id}>
@@ -56,6 +57,10 @@ export default function SearchHeader(props) {
 			<SortLabel htmlFor={sort.id}>{sort.name}</SortLabel>
 		</div>
 	))
+	const handleOpen = () => {
+		if (error.isError) return
+		setOpen(!isOpen)
+	}
 	return (
 		<SearchWrapper>
 			<SearchInput
@@ -67,17 +72,9 @@ export default function SearchHeader(props) {
 				}}
 				value={query}
 			/>
-			<ToggleOpen
-				onClick={() => {
-					setOpen(!isOpen)
-				}}
-			>
-				{isOpen ? '△' : '▽'}
-			</ToggleOpen>
+			<ToggleOpen onClick={handleOpen}>{isOpen ? '△' : '▽'}</ToggleOpen>
 			<ClickCatcher
-				onClick={() => {
-					setOpen(false)
-				}}
+				onClick={handleOpen}
 				style={{ display: isOpen ? 'block' : 'none' }}
 			/>
 			<SearchOptionsWrap style={{ display: isOpen ? 'flex' : 'none' }}>

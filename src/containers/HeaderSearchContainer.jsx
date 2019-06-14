@@ -12,15 +12,16 @@ import { withRouter } from 'react-router-dom'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
 
 const mapStateToProps = state => {
+	const { error } = state
 	const { genres, isAsc, query, sort } = state.filters
 	const { isLoading } = state.filmsSearch
-	return { genres, isAsc, query, isLoading, sort }
+	return { genres, isAsc, query, isLoading, sort, error }
 }
 const mapDispatchToProps = dispatch => {
 	return { dispatch }
 }
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { genres, isAsc, isLoading, query, sort } = stateProps
+	const { genres, isAsc, isLoading, query, sort, error } = stateProps
 	const { dispatch } = dispatchProps
 
 	const doesContainGenre = id => {
@@ -77,6 +78,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		doesThisSort,
 		isAsc,
 		query,
+		error,
 
 		handleToggleGenre,
 		handleQuerySearch,

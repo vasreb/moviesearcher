@@ -5,7 +5,6 @@ import fetchMovie from '../../actions/fetchMovie.js'
 import FavoriteButton from '../FavoriteButton/FavoriteButton.jsx'
 import Skeleton from 'react-loading-skeleton'
 import PropTypes from 'prop-types'
-import ErrorPage from '../ErrorPage/ErrorPage.jsx'
 import {
 	FilmWrapper,
 	Name,
@@ -22,12 +21,13 @@ import {
 } from './style.js'
 
 function FilmPage(props) {
-	const { error } = props
+	const { error, fetchData } = props
 	const { data, isLoading } = props.movie
-	useEffect(() => props.fetchData(props.match.params.id), []) // eslint-disable-line react-hooks/exhaustive-deps
+	const { id: urlId } = props.match.params
 	if (error.isError) {
-		return <ErrorPage error={error.error} />
+		throw Error(error.error)
 	}
+	useEffect(() => fetchData(urlId), [urlId]) //eslint-disable-line
 	if (isLoading) {
 		return (
 			<FilmWrapper>

@@ -15,7 +15,7 @@ export default class MainWrapperBoundary extends Component {
 		error: null,
 	}
 	static getDerivedStateFromError(error) {
-		return { isError: true, error }
+		return { isError: true, error: error.message }
 	}
 
 	render() {
