@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 const FilmWrapper = styled.div`
 	margin: 0 auto;
+	margin-top: 70px;
 	padding: 20px;
 	box-sizing: border-box;
 	width: 80%;
