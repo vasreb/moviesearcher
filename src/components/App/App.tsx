@@ -3,14 +3,14 @@ import { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
 import ReactLoading from 'react-loading'
-import { AppWrapper, CenterLoadingWrapper } from './style.js'
-import ErrorPage from '../ErrorPage/ErrorPage.jsx'
-import MainWrapperBoundary from '../MainWrapperBoundary/MainWrapperBoundary.jsx'
+import { AppWrapper, CenterLoadingWrapper } from './style'
+import ErrorPage from '../ErrorPage/ErrorPage'
+import MainWrapperBoundary from '../MainWrapperBoundary/MainWrapperBoundary'
 
-const Best = React.lazy(() => import('../../containers/Best.jsx'))
-const FilmPage = React.lazy(() => import('../FilmPage/FilmPage.jsx'))
-const Search = React.lazy(() => import('../../containers/Search.jsx'))
-const Favorites = React.lazy(() => import('../../containers/Favorites.jsx'))
+const Best = React.lazy(() => import('../../containers/Best'))
+const FilmPage = React.lazy(() => import('../FilmPage/FilmPage'))
+const Search = React.lazy(() => import('../../containers/Search'))
+const Favorites = React.lazy(() => import('../../containers/Favorites'))
 
 function App() {
 	return (

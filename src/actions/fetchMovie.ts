@@ -3,9 +3,9 @@ import {
 	GET_MOVIE_SUCCESS,
 	GET_ERROR,
 	API_KEY,
-} from './../constants/constants'
+} from '../constants/constants'
 
-import Axios from './../constants/axios'
+import Axios from '../constants/axios'
 
 export default function fetchMovie(id) {
 	return async dispatch => {
@@ -13,7 +13,7 @@ export default function fetchMovie(id) {
 			type: GET_MOVIE_REQUEST,
 		})
 		try {
-			let res = await Axios.get(`/movie/${id}?api_key=${API_KEY}`)
+			let res: any = await Axios.get(`/movie/${id}?api_key=${API_KEY}`)
 			if (res.status === 200) {
 				res = res.data
 				dispatch({

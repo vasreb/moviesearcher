@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import fetchSearchFilms from '../actions/fetchSearchFilms.js'
-import FilmList from '../components/FilmList/FilmList.jsx'
+import fetchSearchFilms from '../actions/fetchSearchFilms'
+import FilmList from '../components/FilmList/FilmList'
 
 const mapStateToProps = state => {
 	const { filmsSearch, error } = state

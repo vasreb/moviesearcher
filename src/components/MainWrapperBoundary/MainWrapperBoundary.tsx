@@ -1,6 +1,6 @@
 import React from 'react'
 import { Component } from 'react'
-import ErrorPage from '../ErrorPage/ErrorPage.jsx'
+import ErrorPage from '../ErrorPage/ErrorPage'
 import styled from 'styled-components'
 
 const MainWrapper = styled.main`

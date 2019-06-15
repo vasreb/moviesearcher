@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import genres from '../../constants/genres.js'
-import sorts from '../../constants/sorts.js'
+import genres from '../../constants/genres'
+import sorts from '../../constants/sorts'
 import {
 	SearchInput,
 	SearchWrapper,
@@ -17,7 +17,7 @@ import {
 	Sort,
 	DirectionLabel,
 	Direction,
-} from './style.js'
+} from './style'
 
 export default function SearchHeader(props) {
 	const [isOpen, setOpen] = useState(false)

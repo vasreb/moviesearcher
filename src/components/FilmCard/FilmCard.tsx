@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
-import { FilmCard, Name, Description, StyledLink } from './style.js'
+import { FilmCard, Name, Description, StyledLink } from './style'
 
 export default function Film(props) {
 	const { preload } = props

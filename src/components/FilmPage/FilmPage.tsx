@@ -1,8 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import fetchMovie from '../../actions/fetchMovie.js'
-import FavoriteButton from '../FavoriteButton/FavoriteButton.jsx'
+import fetchMovie from '../../actions/fetchMovie'
+import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import Skeleton from 'react-loading-skeleton'
 import PropTypes from 'prop-types'
 import {
@@ -18,7 +18,7 @@ import {
 	Rating,
 	InfoColumn,
 	InfoRow,
-} from './style.js'
+} from './style'
 
 function FilmPage(props) {
 	const { error, fetchData } = props
@@ -65,7 +65,7 @@ function FilmPage(props) {
 	} = data
 	const genresLinks = genres.map(genre => (
 		<li key={genre.id}>
-			<Genre to="/search">{genre.name}</Genre>
+			<Genre>{genre.name}</Genre>
 		</li>
 	))
 	return (

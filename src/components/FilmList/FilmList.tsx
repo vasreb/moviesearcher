@@ -2,7 +2,7 @@ import React from 'react'
 import FilmCard from '../FilmCard/FilmCard'
 import InfiniteScroll from 'react-infinite-scroller'
 import PropTypes from 'prop-types'
-import { FilmsWrapper, EmptyListPlaceholder } from './style.js'
+import { FilmsWrapper, EmptyListPlaceholder } from './style'
 import ReactLoading from 'react-loading'
 
 export default function FilmList(props) {

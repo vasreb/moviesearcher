@@ -31,7 +31,7 @@ export default function fetchSearchFilms() {
 			type: GET_SEARCH_REQUEST,
 		})
 		try {
-			let res = await Axios.get(`${link}&page=${page}`)
+			let res: any = await Axios.get(`${link}&page=${page}`)
 			if (res.status === 200) {
 				res = res.data
 				const { total_pages } = res

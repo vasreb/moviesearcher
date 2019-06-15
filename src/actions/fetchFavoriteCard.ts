@@ -3,7 +3,7 @@ import {
 	GET_FAV_FILM_SUCCESS,
 	GET_ERROR,
 	API_KEY,
-} from './../constants/constants'
+} from '../constants/constants'
 
 import Axios from './../constants/axios'
 
@@ -13,7 +13,7 @@ export default function fetchFavoriteCard(id) {
 			type: GET_FAV_FILM_REQUEST,
 		})
 		try {
-			let res = await Axios.get(`/movie/${id}?api_key=${API_KEY}`)
+			let res: any = await Axios.get(`/movie/${id}?api_key=${API_KEY}`)
 			if (res.status === 200) {
 				res = res.data
 				const { id, overview, title, poster_path: posterUrl } = res

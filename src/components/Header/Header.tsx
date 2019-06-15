@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderSearchContainer from '../../containers/HeaderSearchContainer.jsx'
+import HeaderSearchContainer from '../../containers/HeaderSearchContainer'
 import {
 	HeaderWrapper,
 	Logo,

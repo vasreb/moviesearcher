@@ -1,14 +1,15 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import fetchBestFilms from '../actions/fetchBestFilms.js'
-import newBestRequest from '../actions/newBestRequest.js'
-import FilmList from '../components/FilmList/FilmList.jsx'
+import fetchFavoriteCard from '../actions/fetchFavoriteCard'
+import clearFavorites from '../actions/clearFavorites'
+import FilmList from '../components/FilmList/FilmList'
 
 const mapStateToProps = state => {
-	const { filmsBest, error } = state
+	const { favoriteIds, filmsFavorite, error } = state
 	return {
-		filmsBest,
+		favoriteIds,
+		filmsFavorite,
 		error,
 	}
 }
@@ -20,19 +21,22 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { filmsBest, error } = stateProps
+	const { filmsFavorite, favoriteIds, error } = stateProps
 	const { dispatch } = dispatchProps
 	const fetchData = () => {
-		dispatch(fetchBestFilms(filmsBest.currentPage))
+		favoriteIds.data
+			.concat()
+			.reverse()
+			.forEach(id => {
+				dispatch(fetchFavoriteCard(id))
+			})
 	}
-	const resetBestPage = () => {
-		dispatch(newBestRequest())
-	}
+	const clearFavs = () => dispatch(clearFavorites())
 	return {
 		...ownProps,
 		fetchData,
-		films: filmsBest,
-		resetBestPage,
+		films: filmsFavorite,
+		clearFavs,
 		error,
 	}
 }
@@ -40,7 +44,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 function FetchDataWrapper(props) {
 	useEffect(() => {
 		props.fetchData()
-		return () => props.resetBestPage()
+		return () => props.clearFavs()
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 	return <FilmList {...props} />
 }

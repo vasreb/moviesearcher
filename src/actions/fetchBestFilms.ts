@@ -7,15 +7,13 @@ import {
 
 import Axios from '../constants/axios'
 
-// import store from '../store/store'
-
 export default function fetchBestFilms(page = 1) {
 	return async dispatch => {
 		dispatch({
 			type: GET_BEST_REQUEST,
 		})
 		try {
-			let res = await Axios.get(
+			let res: any = await Axios.get(
 				`/movie/top_rated?api_key=${API_KEY}&page=${page}`
 			)
 			if (res.status === 200) {
