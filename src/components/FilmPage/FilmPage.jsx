@@ -43,7 +43,7 @@ function FilmPage(props) {
 							<Skeleton height={30} width={200} />
 						</Name>
 						<Overview>
-							<Skeleton count={15} width={400} />
+							<Skeleton count={15} width={300} />
 						</Overview>
 					</Description>
 				</Primary>
