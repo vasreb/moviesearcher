@@ -27,7 +27,10 @@ function FilmPage(props) {
 	if (error.isError) {
 		throw Error(error.error)
 	}
-	useEffect(() => fetchData(urlId), [urlId]) //eslint-disable-line
+	useEffect(() => {
+		fetchData(urlId)
+		window.scrollTo(0, 0)
+	}, [urlId]) //eslint-disable-line
 	if (isLoading) {
 		return (
 			<FilmWrapper>
