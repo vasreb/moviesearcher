@@ -9,7 +9,7 @@ export const init: State.SearchFilms = {
 	currentPage: 1,
 }
 
-export default function filmsSearch(state = init, action: GetSearchAction) {
+export default function filmsSearch(state = init, action: GetSearchAction): State.SearchFilms {
 	switch (action.type) {
 		case ActionTypeKeys.NEW_SEARCH_REQUEST:
 			return {

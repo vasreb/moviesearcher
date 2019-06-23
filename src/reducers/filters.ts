@@ -1,15 +1,16 @@
 import { ActionTypeKeys } from '../actions/ActionTypeKeys'
 import { FilterAction } from '../actions/ActionTypes'
 import * as State from './State'
+import { POPULARITY } from '../constants/FilterConstants'
 
 export const init: State.Filter = {
 	genres: [],
-	sort: 'popularity',
+	sort: POPULARITY,
 	isAsc: false,
 	query: '',
 }
 
-export default function filters(state = init, action: FilterAction) {
+export default function filters(state = init, action: FilterAction): State.Filter {
 	switch (action.type) {
 		case ActionTypeKeys.ADD_GENRE_ID:
 			return {

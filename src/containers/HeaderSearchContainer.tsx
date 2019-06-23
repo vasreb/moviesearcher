@@ -14,6 +14,7 @@ import { AppState } from '../reducers/main'
 import * as State from '../reducers/State'
 import { Action } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
+import { SearchSort } from '../constants/FilterConstants'
 
 interface StateFromProps {
 	genres: number[];
@@ -58,7 +59,11 @@ export interface MergeProps extends Handles {
 }
 
 interface TimerRef {
-	current: undefined | ReturnType<typeof setTimeout>;
+	current?: ReturnType<typeof setTimeout>;
+}
+
+interface SortCheckbox {
+	value: SearchSort;
 }
 
 const mapStateToProps = (state: AppState): StateFromProps => {
@@ -100,7 +105,7 @@ const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps
 	}
 
 	const handleChangeSort = async (e:SyntheticEvent) => {
-		await dispatch(changeSort((e.target as HTMLInputElement).value))
+		await dispatch(changeSort((e.target as HTMLInputElement as SortCheckbox).value))
 	}
 
 	const handleSortDirection = async () => {
@@ -109,8 +114,9 @@ const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps
 
 	const handleQuerySearch = async (e: SyntheticEvent) => {
 		e.persist()
-		await dispatch(changeSearchQuery((e.target as HTMLInputElement).value))
+		await dispatch(changeSearchQuery((e.target as HTMLInputElement as SortCheckbox).value))
 	}
+	
 	return {
 		doesContainGenre,
 		doesThisSort,
@@ -125,7 +131,6 @@ const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps
 		startSearch
 	}
 }
-// (e.target as HTMLInputElement).value.length > 0
 
 function HeaderSearchContainer(props: MergeProps) {
 	const { isLoading, startSearch } = props

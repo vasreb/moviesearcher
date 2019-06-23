@@ -1,10 +1,10 @@
 import { SpecifyMovie } from '../models/SpecifyMovie'
 import { Page } from '../models/abstract'
-import { FILTER, QUERY } from '../constants/constants'
 import { FilmList } from '../models/abstract'
 import FilmCard from '../models/FilmCard'
+import { SearchSort, SearchMode } from '../constants/FilterConstants'
 
-export type SearchMode = typeof FILTER | typeof QUERY
+export type SearchMode = SearchMode
 
 export interface Movie extends Page {
 	data: SpecifyMovie | null;
@@ -13,7 +13,7 @@ export interface Movie extends Page {
 
 export interface Filter {
 	genres: number[];
-	sort: string;
+	sort: SearchSort;
 	isAsc: boolean;
 	query: string;
 }

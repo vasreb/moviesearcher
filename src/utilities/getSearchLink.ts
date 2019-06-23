@@ -1,5 +1,6 @@
 import store from '../store/store'
-import { QUERY, FILTER, ASC, DESC, API_KEY } from './../constants/constants'
+import { API_KEY } from '../constants/constants'
+import { QUERY, FILTER, ASC, DESC } from './../constants/FilterConstants'
 
 export default function getSearchLink() {
 	const { genres, sort, isAsc, query } = store.getState().filters

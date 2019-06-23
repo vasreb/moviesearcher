@@ -17,7 +17,7 @@ export default function fetchSearchFilms(page: number): ThunkAction<void, AppSta
 			if (res.status === 200) {
 				const { data } = res
 				const { total_pages } = data
-				const mappedFilmCardData: FilmCard[] = data.results.map(film => {
+				const mappedFilmCardsData: FilmCard[] = data.results.map(film => {
 					const { id, poster_path, title, overview } = film
 					return {
 						id,
@@ -29,7 +29,7 @@ export default function fetchSearchFilms(page: number): ThunkAction<void, AppSta
 				dispatch({
 					type: ActionTypeKeys.GET_SEARCH_SUCCESS,
 					payload: {
-						data: mappedFilmCardData,
+						data: mappedFilmCardsData,
 						totalPages: total_pages,
 					},
 				})

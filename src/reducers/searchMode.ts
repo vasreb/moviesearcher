@@ -1,6 +1,6 @@
 import { ActionTypeKeys } from '../actions/ActionTypeKeys'
 import { FilterAction } from '../actions/ActionTypes'
-import { FILTER, QUERY } from '../constants/constants'
+import { FILTER, QUERY } from '../constants/FilterConstants'
 import * as State from './State'
 
 export const init: State.SearchMode = QUERY

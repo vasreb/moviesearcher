@@ -1,6 +1,7 @@
 import FilmCard from '../models/FilmCard'
 import { SpecifyMovie } from '../models/SpecifyMovie'
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { SearchSort } from '../constants/FilterConstants'
 
 //common error
 export interface GetErrorAction {
@@ -90,12 +91,11 @@ export interface DelGenreId {
 
 export interface ChangeSort {
 	type: ActionTypeKeys.CHANGE_SORT;
-	payload: string;
+	payload: SearchSort;
 }
 
 export interface ChangeSortDirection {
 	type: ActionTypeKeys.CHANGE_SORT_DIRECTION;
-	payload: string;
 }
 
 export interface ChangeSearchQuery {

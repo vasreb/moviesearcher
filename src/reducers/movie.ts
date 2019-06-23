@@ -8,7 +8,7 @@ export const init: State.Movie = {
 	isFavorite: false,
 }
 
-export default function movie(state = init, action: GetMovieAction) {
+export default function movie(state = init, action: GetMovieAction): State.Movie {
 	switch (action.type) {
 		case ActionTypeKeys.GET_MOVIE_REQUEST:
 			return {

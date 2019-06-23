@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import genres from '../../constants/genres'
-import sorts from '../../constants/searchSorts'
+import { sorts } from '../../constants/FilterConstants'
 import { MergeProps as Props } from '../../containers/HeaderSearchContainer'
 
 import {

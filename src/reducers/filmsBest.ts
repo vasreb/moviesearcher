@@ -9,7 +9,7 @@ export const init: State.BestFilms = {
 	currentPage: 1,
 }
 
-export default function filmsBest(state = init, action: GetBestAction) {
+export default function filmsBest(state = init, action: GetBestAction): State.BestFilms {
 	switch (action.type) {
 		case ActionTypeKeys.NEW_BEST_REQUEST:
 			return {

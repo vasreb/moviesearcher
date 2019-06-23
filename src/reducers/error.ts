@@ -7,7 +7,7 @@ export const init: State.Error = {
 	error: null,
 }
 
-export default function error(state = init, action: ErrorAction) {
+export default function error(state = init, action: ErrorAction): State.Error {
 	switch (action.type) {
 		case ActionTypeKeys.GET_BEST_REQUEST:
 		case ActionTypeKeys.GET_FAV_FILM_REQUEST:

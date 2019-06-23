@@ -6,7 +6,7 @@ export const init: State.FavoriteIds = {
 	data: [],
 }
 
-export default function favoriteIds(state = init, action: FavoriteIdsAction) {
+export default function favoriteIds(state = init, action: FavoriteIdsAction): State.FavoriteIds {
 	switch (action.type) {
 		case ActionTypeKeys.ADD_FAV_ID:
 			return {

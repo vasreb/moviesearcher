@@ -20,7 +20,6 @@ import {
 } from './style'
 
 export default function FilmPage(props: Props) {
-	console.log(props)
 	const { error, fetchData } = props
 	const { isLoading, data } = props.movie
 	const { id: urlId } = props.match.params

@@ -9,7 +9,7 @@ export const init: State.FavoriteFilms = {
 	currentPage: 1,
 }
 
-export default function filmsFavorite(state = init, action: GetFavoriteAction) {
+export default function filmsFavorite(state = init, action: GetFavoriteAction): State.FavoriteFilms {
 	switch (action.type) {
 		case ActionTypeKeys.GET_FAV_FILM_REQUEST:
 			return {
