@@ -8,7 +8,20 @@ import filters from './filters'
 import searchMode from './searchMode'
 import error from './error'
 
-export default combineReducers({
+import * as State from './State'
+
+export interface AppState {
+	filmsBest: State.BestFilms;
+	movie: State.Movie;
+	filmsSearch: State.SearchFilms;
+	favoriteIds: State.FavoriteIds
+	filmsFavorite: State.FavoriteFilms;
+	filters: State.Filter;
+	searchMode: State.SearchMode;
+	error: State.Error;
+}
+
+export const rootReducer = combineReducers<AppState>({
 	filmsBest,
 	movie,
 	filmsSearch,
@@ -18,3 +31,4 @@ export default combineReducers({
 	searchMode,
 	error,
 })
+

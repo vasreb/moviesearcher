@@ -1,30 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
-import { FilmCard, Name, Description, StyledLink } from './style'
+import { FilmCardWrapper, Name, Description, StyledLink } from './style'
+import FilmCard from '../../models/FilmCard'
 
-export default function Film(props) {
-	const { preload } = props
-	if (preload) {
+interface FilmCardProps {
+	film?: FilmCard;
+}
+
+export default function Film(props: FilmCardProps) {
+	const { film } = props
+	if (film === undefined) {
 		return (
 			<StyledLink to={'/'}>
-				<FilmCard>
+				<FilmCardWrapper>
 					<Skeleton height={533} />
-				</FilmCard>
+				</FilmCardWrapper>
 			</StyledLink>
 		)
 	}
-	const { id, overview, title, posterUrl } = props.film
+	const { id, overview, title, posterUrl } = film
 	return (
 		<StyledLink to={`/film/${id}`}>
-			<FilmCard
+			<FilmCardWrapper
 				style={{
 					backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterUrl})`,
 				}}
 			>
 				<Name>{title}</Name>
 				<Description>{overview}</Description>
-			</FilmCard>
+			</FilmCardWrapper>
 		</StyledLink>
 	)
 }

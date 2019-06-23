@@ -1,41 +1,23 @@
-import {
-	GET_SEARCH_REQUEST,
-	GET_SEARCH_SUCCESS,
-	GET_ERROR,
-	QUERY,
-	FILTER,
-	ASC,
-	DESC,
-	API_KEY,
-} from '../constants/constants'
-
+import { Action } from 'redux'
+import FilmCard from '../models/FilmCard'
+import { ActionTypeKeys } from './ActionTypeKeys'
+import { AppState } from '../reducers/main'
 import Axios from '../constants/axios'
+import { ThunkAction } from 'redux-thunk'
+import getSearchLink from '../utilities/getSearchLink'
 
-import store from '../store/store'
-
-export default function fetchSearchFilms() {
-	const { currentPage: page } = store.getState().filmsSearch
-	const { genres, sort, isAsc, query } = store.getState().filters
-	const mode = store.getState().searchMode
-	let link
-	if (mode === QUERY) {
-		link = `/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
-	} else if (mode === FILTER) {
-		link = `/discover/movie?api_key=${API_KEY}&vote_count.gte=200&sort_by=${sort}.${
-			isAsc ? ASC : DESC
-		}&with_genres=${genres.concat().join(',')}`
-	}
-
+export default function fetchSearchFilms(page: number): ThunkAction<void, AppState, null, Action<string>> {
+	const link = getSearchLink()
 	return async dispatch => {
 		dispatch({
-			type: GET_SEARCH_REQUEST,
+			type: ActionTypeKeys.GET_SEARCH_REQUEST,
 		})
 		try {
-			let res: any = await Axios.get(`${link}&page=${page}`)
+			let res = await Axios.get(`${link}&page=${page}`)
 			if (res.status === 200) {
-				res = res.data
-				const { total_pages } = res
-				res = res.results.map(film => {
+				const { data } = res
+				const { total_pages } = data
+				const mappedFilmCardData: FilmCard[] = data.results.map(film => {
 					const { id, poster_path, title, overview } = film
 					return {
 						id,
@@ -45,18 +27,18 @@ export default function fetchSearchFilms() {
 					}
 				})
 				dispatch({
-					type: GET_SEARCH_SUCCESS,
+					type: ActionTypeKeys.GET_SEARCH_SUCCESS,
 					payload: {
-						data: res,
+						data: mappedFilmCardData,
 						totalPages: total_pages,
 					},
 				})
 			} else {
-				throw new Error(res.status_code)
+				throw new Error(res.data.status_code)
 			}
 		} catch (err) {
 			dispatch({
-				type: GET_ERROR,
+				type: ActionTypeKeys.GET_ERROR,
 				payload: err.message,
 			})
 		}

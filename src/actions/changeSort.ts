@@ -1,8 +1,14 @@
-import { CHANGE_SORT } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function AddGenre(sortName) {
+export interface ChangeSortAction {
+	type: ActionTypeKeys.CHANGE_SORT;
+	payload: string;
+}
+
+export default function changeSort(sortName): ChangeSortAction {
+	//add sort type
 	return {
-		type: CHANGE_SORT,
+		type: ActionTypeKeys.CHANGE_SORT,
 		payload: sortName,
 	}
 }

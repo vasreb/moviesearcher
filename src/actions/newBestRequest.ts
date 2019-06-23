@@ -1,7 +1,7 @@
-import { NEW_BEST_REQUEST } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
 export default function newBestRequest() {
 	return {
-		type: NEW_BEST_REQUEST,
+		type: ActionTypeKeys.NEW_BEST_REQUEST,
 	}
 }

@@ -4,8 +4,9 @@ import InfiniteScroll from 'react-infinite-scroller'
 import PropTypes from 'prop-types'
 import { FilmsWrapper, EmptyListPlaceholder } from './style'
 import ReactLoading from 'react-loading'
+import { FilmListProps } from '../../models/abstract'
 
-export default function FilmList(props) {
+export default function FilmList(props: FilmListProps) {
 	const { fetchData, films, error } = props
 	const { data, isLoading, currentPage, totalPages } = films
 	if (error.isError) {
@@ -19,7 +20,11 @@ export default function FilmList(props) {
 	const Preloader = Array(10)
 		.fill(1)
 		.map((a, index) => {
-			return <FilmCard key={index} preload />
+			return (
+				<li key={index}>
+					<FilmCard />
+				</li>
+			)
 		})
 	if (filmCards.length === 0) {
 		return <EmptyListPlaceholder>{props.placeholder}</EmptyListPlaceholder>
@@ -32,9 +37,7 @@ export default function FilmList(props) {
 			loader={<ReactLoading key={-1} type="bubbles" color="black" />}
 			initialLoad={false}
 		>
-			<FilmsWrapper>
-				{isLoading ? [...filmCards, ...Preloader] : filmCards}
-			</FilmsWrapper>
+			<FilmsWrapper>{isLoading ? [...filmCards, ...Preloader] : filmCards}</FilmsWrapper>
 		</InfiniteScroll>
 	)
 }
@@ -44,10 +47,6 @@ FilmList.propTypes = {
 	films: PropTypes.shape({
 		data: PropTypes.array.isRequired,
 		isLoading: PropTypes.bool.isRequired,
-		error: PropTypes.shape({
-			error: PropTypes.any,
-			isError: PropTypes.bool.isRequired,
-		}),
 		currentPage: PropTypes.number.isRequired,
 		totalPages: PropTypes.number,
 	}),

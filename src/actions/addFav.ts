@@ -1,8 +1,13 @@
-import { ADD_FAV_ID } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function AddFav(id) {
+interface AddFavAction {
+	type: ActionTypeKeys.ADD_FAV_ID;
+	payload: number;
+}
+
+export default function addFav(id: number): AddFavAction {
 	return {
-		type: ADD_FAV_ID,
+		type: ActionTypeKeys.ADD_FAV_ID,
 		payload: id,
 	}
 }

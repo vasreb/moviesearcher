@@ -1,7 +1,13 @@
-import { CHANGE_SEARCH_QUERY } from './../constants/constants'
-export default function changeSearchQuery(text) {
+import { ActionTypeKeys } from './ActionTypeKeys'
+
+export interface ChangeSearchQueryAction {
+	type: ActionTypeKeys.CHANGE_SEARCH_QUERY;
+	payload: string;
+}
+
+export default function changeSearchQuery(text: string): ChangeSearchQueryAction {
 	return {
-		type: CHANGE_SEARCH_QUERY,
+		type: ActionTypeKeys.CHANGE_SEARCH_QUERY,
 		payload: text,
 	}
 }

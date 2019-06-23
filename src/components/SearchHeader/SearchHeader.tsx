@@ -2,7 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import genres from '../../constants/genres'
-import sorts from '../../constants/sorts'
+import sorts from '../../constants/searchSorts'
+import { MergeProps as Props } from '../../containers/HeaderSearchContainer'
+
 import {
 	SearchInput,
 	SearchWrapper,
@@ -19,7 +21,7 @@ import {
 	Direction,
 } from './style'
 
-export default function SearchHeader(props) {
+export default function SearchHeader(props: Props) {
 	const [isOpen, setOpen] = useState(false)
 	const {
 		handleQuerySearch,
@@ -73,22 +75,13 @@ export default function SearchHeader(props) {
 				value={query}
 			/>
 			<ToggleOpen onClick={handleOpen}>{isOpen ? '△' : '▽'}</ToggleOpen>
-			<ClickCatcher
-				onClick={handleOpen}
-				style={{ display: isOpen ? 'block' : 'none' }}
-			/>
+			<ClickCatcher onClick={handleOpen} style={{ display: isOpen ? 'block' : 'none' }} />
 			<SearchOptionsWrap style={{ display: isOpen ? 'flex' : 'none' }}>
 				<Genres>{genresInputs}</Genres>
 				<Sorts>
 					{sortsRadio}
-					<Direction
-						type="checkbox"
-						onChange={handleSortDirection}
-						id="changeDirection"
-					/>
-					<DirectionLabel htmlFor="changeDirection">
-						Direction {isAsc ? '△' : '▽'}
-					</DirectionLabel>
+					<Direction type="checkbox" onChange={handleSortDirection} id="changeDirection" />
+					<DirectionLabel htmlFor="changeDirection">Direction {isAsc ? '△' : '▽'}</DirectionLabel>
 				</Sorts>
 			</SearchOptionsWrap>
 		</SearchWrapper>

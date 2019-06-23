@@ -1,8 +1,13 @@
-import { DEL_FAV_ID } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function DelFav(id) {
+interface DelFavAction {
+	type: ActionTypeKeys.DEL_FAV_ID;
+	payload: number;
+}
+
+export default function DelFav(id: number): DelFavAction {
 	return {
-		type: DEL_FAV_ID,
+		type: ActionTypeKeys.DEL_FAV_ID,
 		payload: id,
 	}
 }

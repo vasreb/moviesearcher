@@ -4,8 +4,30 @@ import { connect } from 'react-redux'
 import fetchFavoriteCard from '../actions/fetchFavoriteCard'
 import clearFavorites from '../actions/clearFavorites'
 import FilmList from '../components/FilmList/FilmList'
+import { AppState } from '../reducers/main'
+import * as State from '../reducers/State'
+import { Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
+import { FilmListProps } from '../models/abstract'
 
-const mapStateToProps = state => {
+interface StateFromProps {
+	favoriteIds: State.FavoriteIds;
+	filmsFavorite: State.FavoriteFilms;
+	error: State.Error;
+}
+
+interface DispatchFromProps {
+	dispatch: ThunkDispatch<AppState, null, Action<string>>;
+}
+
+interface MergeProps extends FilmListProps {
+	fetchData: () => void;
+	films: State.FavoriteFilms;
+	clearFavs: () => void;
+	error: State.Error;
+}
+
+const mapStateToProps = (state: AppState): StateFromProps => {
 	const { favoriteIds, filmsFavorite, error } = state
 	return {
 		favoriteIds,
@@ -14,13 +36,13 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, Action<string>>): DispatchFromProps => {
 	return {
 		dispatch,
 	}
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps): MergeProps => {
 	const { filmsFavorite, favoriteIds, error } = stateProps
 	const { dispatch } = dispatchProps
 	const fetchData = () => {
@@ -33,7 +55,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	}
 	const clearFavs = () => dispatch(clearFavorites())
 	return {
-		...ownProps,
 		fetchData,
 		films: filmsFavorite,
 		clearFavs,
@@ -41,7 +62,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	}
 }
 
-function FetchDataWrapper(props) {
+function FetchDataWrapper(props: MergeProps) {
 	useEffect(() => {
 		props.fetchData()
 		return () => props.clearFavs()

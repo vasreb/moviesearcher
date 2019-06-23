@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const FilmCard = styled.div`
+const FilmCardWrapper = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -34,7 +34,7 @@ const Name = styled.h2`
 	font-family: Tahoma, Sedona;
 	opacity: 0;
 	transition: opacity 0.1s ease-in;
-	${FilmCard}:hover & {
+	${FilmCardWrapper}:hover & {
 		opacity: 1;
 	}
 	@media (max-width: 1100px) {
@@ -58,7 +58,7 @@ const Description = styled.ul`
 	font-size: 14px;
 	font-family: Tahoma, Sedona;
 	transition: opacity 0.1s ease-in;
-	${FilmCard}:hover & {
+	${FilmCardWrapper}:hover & {
 		opacity: 1;
 	}
 	@media (max-width: 1100px) {
@@ -72,4 +72,4 @@ const StyledLink = styled(Link)`
 	align-items: center;
 `
 
-export { FilmCard, Name, Description, StyledLink }
+export { FilmCardWrapper, Name, Description, StyledLink }

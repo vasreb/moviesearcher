@@ -1,39 +1,36 @@
-import {
-	GET_SEARCH_REQUEST,
-	GET_SEARCH_SUCCESS,
-	GET_ERROR,
-	NEW_SEARCH_REQUEST,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { GetSearchAction } from '../actions/ActionTypes'
+import * as State from './State'
 
-export const init = {
+export const init: State.SearchFilms = {
 	isLoading: false,
 	data: [],
-	totalPages: null,
+	totalPages: 0,
 	currentPage: 1,
 }
 
-export default function filmsSearch(state = init, action) {
+export default function filmsSearch(state = init, action: GetSearchAction) {
 	switch (action.type) {
-		case NEW_SEARCH_REQUEST:
+		case ActionTypeKeys.NEW_SEARCH_REQUEST:
 			return {
 				...state,
 				data: [],
 				currentPage: 1,
 			}
-		case GET_SEARCH_REQUEST:
+		case ActionTypeKeys.GET_SEARCH_REQUEST:
 			return {
 				...state,
 				isLoading: true,
 			}
-		case GET_SEARCH_SUCCESS:
+		case ActionTypeKeys.GET_SEARCH_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
-				data: state.data.concat(action.payload.data),
+				data: [...state.data, ...action.payload.data],
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_ERROR:
+		case ActionTypeKeys.GET_ERROR:
 			return {
 				...state,
 				isLoading: false,

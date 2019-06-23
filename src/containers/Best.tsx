@@ -4,8 +4,29 @@ import { connect } from 'react-redux'
 import fetchBestFilms from '../actions/fetchBestFilms'
 import newBestRequest from '../actions/newBestRequest'
 import FilmList from '../components/FilmList/FilmList'
+import { AppState } from '../reducers/main'
+import * as State from '../reducers/State'
+import { Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
+import { FilmListProps } from '../models/abstract'
 
-const mapStateToProps = state => {
+interface StateFromProps {
+	filmsBest: State.BestFilms;
+	error: State.Error;
+}
+
+interface DispatchFromProps {
+	dispatch: ThunkDispatch<AppState, null, Action<string>>;
+}
+
+interface MergeProps extends FilmListProps {
+	fetchData: () => void;
+	films: State.BestFilms;
+	resetBestPage: () => void;
+	error: State.Error;
+}
+
+const mapStateToProps = (state: AppState): StateFromProps => {
 	const { filmsBest, error } = state
 	return {
 		filmsBest,
@@ -13,13 +34,13 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, Action<string>>): DispatchFromProps => {
 	return {
 		dispatch,
 	}
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps): MergeProps => {
 	const { filmsBest, error } = stateProps
 	const { dispatch } = dispatchProps
 	const fetchData = () => {
@@ -29,7 +50,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		dispatch(newBestRequest())
 	}
 	return {
-		...ownProps,
 		fetchData,
 		films: filmsBest,
 		resetBestPage,
@@ -37,7 +57,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 	}
 }
 
-function FetchDataWrapper(props) {
+function FetchDataWrapper(props: MergeProps) {
 	useEffect(() => {
 		props.fetchData()
 		return () => props.resetBestPage()

@@ -1,10 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
-import fetchMovie from '../../actions/fetchMovie'
-import FavoriteButton from '../FavoriteButton/FavoriteButton'
+import FavoriteButtonContainer from '../../containers/FavoriteButtonContainer'
 import Skeleton from 'react-loading-skeleton'
-import PropTypes from 'prop-types'
+import { MergeProps as Props } from '../../containers/FilmPageContainer'
+
 import {
 	FilmWrapper,
 	Name,
@@ -20,18 +19,22 @@ import {
 	InfoRow,
 } from './style'
 
-function FilmPage(props) {
+export default function FilmPage(props: Props) {
+	console.log(props)
 	const { error, fetchData } = props
-	const { data, isLoading } = props.movie
+	const { isLoading, data } = props.movie
 	const { id: urlId } = props.match.params
 	if (error.isError) {
 		throw Error(error.error)
 	}
+	if (!urlId) {
+		throw Error('Film ID is undefined')
+	}
 	useEffect(() => {
-		fetchData(urlId)
+		fetchData(+urlId)
 		window.scrollTo(0, 0)
 	}, [urlId]) //eslint-disable-line
-	if (isLoading) {
+	if (isLoading || data === null) {
 		return (
 			<FilmWrapper>
 				<Primary>
@@ -60,6 +63,7 @@ function FilmPage(props) {
 		tagline,
 		revenue,
 		budget,
+		poster_path,
 		status,
 		id,
 	} = data
@@ -73,9 +77,7 @@ function FilmPage(props) {
 			<Primary>
 				<Poster
 					style={{
-						backgroundImage: `url(https://image.tmdb.org/t/p/w500/${
-							props.movie.data.poster_path
-						})`,
+						backgroundImage: `url(https://image.tmdb.org/t/p/w500/${poster_path})`,
 					}}
 				/>
 				<Description>
@@ -86,7 +88,7 @@ function FilmPage(props) {
 						<br />
 						Vote count: {vote_count}
 					</Rating>
-					<FavoriteButton id={id} />
+					<FavoriteButtonContainer id={id} />
 					<Genres>
 						Genres:
 						{genresLinks}
@@ -107,47 +109,3 @@ function FilmPage(props) {
 		</FilmWrapper>
 	)
 }
-
-FilmPage.propTypes = {
-	movie: PropTypes.shape({
-		data: PropTypes.object.isRequired,
-		isLoading: PropTypes.bool.isRequired,
-		error: PropTypes.shape({
-			error: PropTypes.any,
-			isError: PropTypes.bool.isRequired,
-		}),
-	}),
-}
-
-const mapStateToProps = state => {
-	const { movie, error } = state
-	return {
-		movie,
-		error,
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		dispatch,
-	}
-}
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	const { dispatch } = dispatchProps
-	const fetchData = id => {
-		dispatch(fetchMovie(id))
-	}
-	return {
-		...stateProps,
-		fetchData,
-		...ownProps,
-		dispatch,
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-	mergeProps
-)(FilmPage)

@@ -10,19 +10,21 @@ const MainWrapper = styled.main`
 `
 
 export default class MainWrapperBoundary extends Component {
-	state = {
+	public state = {
 		isError: false,
 		error: null,
 	}
-	static getDerivedStateFromError(error) {
+	public static getDerivedStateFromError(error) {
 		return { isError: true, error: error.message }
 	}
 
-	render() {
+	public render() {
 		if (this.state.isError) {
 			return <ErrorPage error={this.state.error} />
 		}
 
+		// eslint-disable-next-line react/prop-types
 		return <MainWrapper>{this.props.children}</MainWrapper>
 	}
 }
+

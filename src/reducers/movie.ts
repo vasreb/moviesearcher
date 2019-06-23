@@ -1,34 +1,28 @@
-import {
-	GET_MOVIE_REQUEST,
-	GET_MOVIE_SUCCESS,
-	GET_ERROR,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { GetMovieAction } from '../actions/ActionTypes'
+import * as State from './State'
 
-export const init = {
+export const init: State.Movie = {
 	isLoading: true,
-	data: {},
+	data: null,
 	isFavorite: false,
 }
 
-export default function movie(state = init, action) {
+export default function movie(state = init, action: GetMovieAction) {
 	switch (action.type) {
-		case GET_MOVIE_REQUEST:
+		case ActionTypeKeys.GET_MOVIE_REQUEST:
 			return {
 				...state,
 				isLoading: true,
-				error: {
-					isError: false,
-					error: null,
-				},
 				isFavorite: false,
 			}
-		case GET_MOVIE_SUCCESS:
+		case ActionTypeKeys.GET_MOVIE_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				data: action.payload,
 			}
-		case GET_ERROR:
+		case ActionTypeKeys.GET_ERROR:
 			return {
 				...state,
 				isLoading: false,

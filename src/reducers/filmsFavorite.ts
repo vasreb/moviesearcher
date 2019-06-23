@@ -1,36 +1,33 @@
-import {
-	GET_FAV_FILM_REQUEST,
-	GET_FAV_FILM_SUCCESS,
-	GET_ERROR,
-	CLEAR_FAVS,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { GetFavoriteAction } from '../actions/ActionTypes'
+import * as State from './State'
 
-export const init = {
+export const init: State.FavoriteFilms = {
 	isLoading: false,
 	data: [],
 	totalPages: -1,
 	currentPage: 1,
 }
 
-export default function filmsFavorite(state = init, action) {
+export default function filmsFavorite(state = init, action: GetFavoriteAction) {
 	switch (action.type) {
-		case GET_FAV_FILM_REQUEST:
+		case ActionTypeKeys.GET_FAV_FILM_REQUEST:
 			return {
 				...state,
 				isLoading: true,
 			}
-		case GET_FAV_FILM_SUCCESS:
+		case ActionTypeKeys.GET_FAV_FILM_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
-				data: state.data.concat(action.payload),
+				data: [...state.data, action.payload],
 			}
-		case GET_ERROR:
+		case ActionTypeKeys.GET_ERROR:
 			return {
 				...state,
 				isLoading: false,
 			}
-		case CLEAR_FAVS:
+		case ActionTypeKeys.CLEAR_FAVS:
 			return {
 				...state,
 				data: [],

@@ -1,7 +1,11 @@
-import { CLEAR_FAVS } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function clearFavorites() {
+export interface ClearFavoritesAction {
+	type: ActionTypeKeys.CLEAR_FAVS;
+}
+
+export default function clearFavorites(): ClearFavoritesAction {
 	return {
-		type: CLEAR_FAVS,
+		type: ActionTypeKeys.CLEAR_FAVS,
 	}
 }

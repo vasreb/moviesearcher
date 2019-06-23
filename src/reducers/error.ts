@@ -1,25 +1,22 @@
-import {
-	GET_ERROR,
-	GET_BEST_REQUEST,
-	GET_FAV_FILM_REQUEST,
-	GET_SEARCH_REQUEST,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { ErrorAction } from '../actions/ActionTypes'
+import * as State from './State'
 
-export const init = {
+export const init: State.Error = {
 	isError: false,
 	error: null,
 }
 
-export default function error(state = init, action) {
+export default function error(state = init, action: ErrorAction) {
 	switch (action.type) {
-		case GET_BEST_REQUEST:
-		case GET_FAV_FILM_REQUEST:
-		case GET_SEARCH_REQUEST:
+		case ActionTypeKeys.GET_BEST_REQUEST:
+		case ActionTypeKeys.GET_FAV_FILM_REQUEST:
+		case ActionTypeKeys.GET_SEARCH_REQUEST:
 			return {
 				isError: false,
 				error: null,
 			}
-		case GET_ERROR:
+		case ActionTypeKeys.GET_ERROR:
 			return {
 				isError: true,
 				error: action.payload,

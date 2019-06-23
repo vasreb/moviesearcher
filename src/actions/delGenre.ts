@@ -1,8 +1,13 @@
-import { DEL_GENRE_ID } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function DelGenre(id) {
+interface DelGenreAction {
+	type: ActionTypeKeys.DEL_GENRE_ID;
+	payload: number;
+}
+
+export default function DelGenre(id: number): DelGenreAction {
 	return {
-		type: DEL_GENRE_ID,
+		type: ActionTypeKeys.DEL_GENRE_ID,
 		payload: id,
 	}
 }

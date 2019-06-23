@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { connect } from 'react-redux'
 import addGenre from './../actions/addGenre'
 import delGenre from './../actions/delGenre'
@@ -8,28 +8,78 @@ import { useRef } from 'react'
 import fetchSearchFilms from '../actions/fetchSearchFilms'
 import changeSearchQuery from './../actions/changeSearchQuery'
 import newSearchRequest from './../actions/newSearchRequest'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import SearchHeader from '../components/SearchHeader/SearchHeader'
+import { AppState } from '../reducers/main'
+import * as State from '../reducers/State'
+import { Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 
-const mapStateToProps = state => {
+interface StateFromProps {
+	genres: number[];
+	isAsc: boolean;
+	query: string;
+	isLoading: boolean;
+	sort: string;
+	error: State.Error;
+}
+
+interface DispatchFromProps {
+	dispatch: ThunkDispatch<AppState, null, Action<string>>;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface OwnProps extends RouteComponentProps {
+}
+
+type DispatchFnArg = number & SyntheticEvent & undefined
+
+type DispatchFn = ToggleId | EventHandler | Void 
+
+type ToggleId = (id: number) => Promise<void>;
+type EventHandler = (e: SyntheticEvent) => Promise<void>;
+type Void = () => Promise<void>;
+
+interface Handles {
+	handleToggleGenre: ToggleId;
+	handleQuerySearch: EventHandler;
+	handleSortDirection: Void;
+	handleChangeSort: EventHandler;
+}
+
+export interface MergeProps extends Handles {
+	doesContainGenre: (id: number) => boolean;
+	doesThisSort: (value: string) => boolean;
+	isAsc: boolean;
+	query: string;
+	error: State.Error;
+	isLoading: boolean;
+	startSearch: () => void;
+}
+
+interface TimerRef {
+	current: undefined | ReturnType<typeof setTimeout>;
+}
+
+const mapStateToProps = (state: AppState): StateFromProps => {
 	const { error } = state
 	const { genres, isAsc, query, sort } = state.filters
 	const { isLoading } = state.filmsSearch
 	return { genres, isAsc, query, isLoading, sort, error }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, Action<string>>): DispatchFromProps => {
 	return { dispatch }
 }
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps: StateFromProps, dispatchProps: DispatchFromProps, ownProps: OwnProps): MergeProps => {
 	const { genres, isAsc, isLoading, query, sort, error } = stateProps
 	const { dispatch } = dispatchProps
 
-	const doesContainGenre = id => {
+	const doesContainGenre = (id: number) => {
 		return genres.includes(id)
 	}
 
-	const doesThisSort = value => {
-		return sort.includes(value)
+	const doesThisSort = (value: string) => {
+		return sort === value
 	}
 
 	const startSearch = async () => {
@@ -37,41 +87,29 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 			ownProps.history.push('/search')
 		}
 		await dispatch(newSearchRequest())
-		await dispatch(fetchSearchFilms())
+		window.scrollTo(0,0)
+		await dispatch(fetchSearchFilms(1))
 	}
 
-	const handleToggleGenre = async id => {
+	const handleToggleGenre = async (id: number) => {
 		if (genres.includes(id)) {
 			dispatch(delGenre(id))
 		} else {
 			dispatch(addGenre(id))
 		}
-		await startSearch()
 	}
 
-	const handleChangeSort = async e => {
-		await dispatch(changeSort(e.target.value))
-		await startSearch()
+	const handleChangeSort = async (e:SyntheticEvent) => {
+		await dispatch(changeSort((e.target as HTMLInputElement).value))
 	}
 
 	const handleSortDirection = async () => {
 		await dispatch(changeSortDirection())
-		await startSearch()
 	}
 
-	const handleQuerySearch = async (e, timer) => {
-		clearTimeout(timer.current)
+	const handleQuerySearch = async (e: SyntheticEvent) => {
 		e.persist()
-		const LoadData = async () => {
-			if (isLoading) {
-				timer.current = setTimeout(LoadData, 1000)
-			}
-			if (e.target.value.length > 0) {
-				await startSearch()
-			}
-		}
-		await dispatch(changeSearchQuery(e.target.value))
-		timer.current = setTimeout(LoadData, 1000)
+		await dispatch(changeSearchQuery((e.target as HTMLInputElement).value))
 	}
 	return {
 		doesContainGenre,
@@ -79,20 +117,43 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 		isAsc,
 		query,
 		error,
-
 		handleToggleGenre,
 		handleQuerySearch,
 		handleSortDirection,
 		handleChangeSort,
+		isLoading,
+		startSearch
 	}
 }
+// (e.target as HTMLInputElement).value.length > 0
 
-function HeaderSearchContainer(props) {
-	let timer = useRef() //storage for search timer
-	const handleQuerySearchWrap = e => {
-		props.handleQuerySearch(e, timer)
+function HeaderSearchContainer(props: MergeProps) {
+	const { isLoading, startSearch } = props
+	let timer: TimerRef = useRef() //storage for search timer
+
+	function DelayWrapper (dispatchFn: DispatchFn) {
+		const StartTimer = () => {
+			timer.current = setTimeout(async () => {
+				await startSearch()
+				clearTimeout(timer.current)
+			}, 1500)
+		}
+		return async (value: DispatchFnArg) => {
+			await dispatchFn(value)
+			clearTimeout(timer.current)
+			StartTimer()
+			if (isLoading) {
+				StartTimer()
+			}
+		}
 	}
-	return <SearchHeader {...props} handleQuerySearch={handleQuerySearchWrap} />
+	const handles: Handles = {
+		handleQuerySearch: DelayWrapper(props.handleQuerySearch) as EventHandler,
+		handleToggleGenre: DelayWrapper(props.handleToggleGenre) as ToggleId,
+		handleSortDirection: DelayWrapper(props.handleSortDirection) as Void,
+		handleChangeSort: DelayWrapper(props.handleChangeSort) as EventHandler,
+}
+	return <SearchHeader {...{...props, ...handles}} />
 }
 
 export default withRouter(

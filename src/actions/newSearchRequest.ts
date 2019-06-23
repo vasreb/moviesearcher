@@ -1,7 +1,7 @@
-import { NEW_SEARCH_REQUEST } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
 export default function newSearchRequest() {
 	return {
-		type: NEW_SEARCH_REQUEST,
+		type: ActionTypeKeys.NEW_SEARCH_REQUEST,
 	}
 }

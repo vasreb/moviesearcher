@@ -1,8 +1,13 @@
-import { ADD_GENRE_ID } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function AddGenre(id) {
+interface AddGenreAction {
+	type: ActionTypeKeys.ADD_GENRE_ID;
+	payload: number;
+}
+
+export default function addGenre(id: number): AddGenreAction {
 	return {
-		type: ADD_GENRE_ID,
+		type: ActionTypeKeys.ADD_GENRE_ID,
 		payload: id,
 	}
 }

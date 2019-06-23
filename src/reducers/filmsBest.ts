@@ -1,39 +1,36 @@
-import {
-	GET_BEST_REQUEST,
-	GET_BEST_SUCCESS,
-	GET_ERROR,
-	NEW_BEST_REQUEST,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { GetBestAction } from '../actions/ActionTypes'
+import * as State from './State'
 
-export const init = {
+export const init: State.BestFilms = {
 	isLoading: false,
 	data: [],
-	totalPages: null,
+	totalPages: 0,
 	currentPage: 1,
 }
 
-export default function filmsBest(state = init, action) {
+export default function filmsBest(state = init, action: GetBestAction) {
 	switch (action.type) {
-		case NEW_BEST_REQUEST:
+		case ActionTypeKeys.NEW_BEST_REQUEST:
 			return {
 				...state,
 				currentPage: 1,
 				data: [],
 			}
-		case GET_BEST_REQUEST:
+		case ActionTypeKeys.GET_BEST_REQUEST:
 			return {
 				...state,
 				isLoading: true,
 			}
-		case GET_BEST_SUCCESS:
+		case ActionTypeKeys.GET_BEST_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
-				data: state.data.concat(action.payload.data),
+				data: [...state.data, ...action.payload.data],
 				totalPages: action.payload.totalPages,
 				currentPage: state.currentPage + 1,
 			}
-		case GET_ERROR:
+		case ActionTypeKeys.GET_ERROR:
 			return {
 				...state,
 				isLoading: false,

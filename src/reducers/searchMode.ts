@@ -1,23 +1,18 @@
-import {
-	ADD_GENRE_ID,
-	DEL_GENRE_ID,
-	CHANGE_SORT,
-	CHANGE_SORT_DIRECTION,
-	CHANGE_SEARCH_QUERY,
-	FILTER,
-	QUERY,
-} from '../constants/constants'
+import { ActionTypeKeys } from '../actions/ActionTypeKeys'
+import { FilterAction } from '../actions/ActionTypes'
+import { FILTER, QUERY } from '../constants/constants'
+import * as State from './State'
 
-export const init = QUERY
+export const init: State.SearchMode = QUERY
 
-export default function searchMode(state = init, action) {
+export default function searchMode(state = init, action: FilterAction) {
 	switch (action.type) {
-		case ADD_GENRE_ID:
-		case DEL_GENRE_ID:
-		case CHANGE_SORT:
-		case CHANGE_SORT_DIRECTION:
+		case ActionTypeKeys.ADD_GENRE_ID:
+		case ActionTypeKeys.DEL_GENRE_ID:
+		case ActionTypeKeys.CHANGE_SORT:
+		case ActionTypeKeys.CHANGE_SORT_DIRECTION:
 			return FILTER
-		case CHANGE_SEARCH_QUERY:
+		case ActionTypeKeys.CHANGE_SEARCH_QUERY:
 			return QUERY
 		default:
 			return state

@@ -1,8 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ErrorWrapper, ErrorTitle, ErrorText, ErrorInfo } from './style'
 
-export default function ErrorPage(props) {
+interface ErrorPageProps {
+	error: string | null;
+}
+
+export default function ErrorPage(props: ErrorPageProps) {
 	return (
 		<ErrorWrapper>
 			<ErrorTitle>Sorry</ErrorTitle>
@@ -10,8 +13,4 @@ export default function ErrorPage(props) {
 			<ErrorInfo>{props.error}</ErrorInfo>
 		</ErrorWrapper>
 	)
-}
-
-ErrorPage.propTypes = {
-	error: PropTypes.string,
 }

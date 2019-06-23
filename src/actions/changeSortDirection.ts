@@ -1,7 +1,11 @@
-import { CHANGE_SORT_DIRECTION } from './../constants/constants'
+import { ActionTypeKeys } from './ActionTypeKeys'
 
-export default function changeSortDirection() {
+export interface ChangeSortDirectionAction {
+	type: ActionTypeKeys.CHANGE_SORT_DIRECTION;
+}
+
+export default function changeSortDirection(): ChangeSortDirectionAction {
 	return {
-		type: CHANGE_SORT_DIRECTION,
+		type: ActionTypeKeys.CHANGE_SORT_DIRECTION,
 	}
 }
