@@ -20,7 +20,8 @@
     "redux-localstorage-simple": "^2.1.6",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.3.1"
+    "styled-components": "^4.3.1",
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,7 +60,6 @@
     "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "prettier": "^1.18.2",
-    "source-map-loader": "^0.2.4",
-    "typescript": "^3.5.2"
+    "source-map-loader": "^0.2.4"
   }
 }
