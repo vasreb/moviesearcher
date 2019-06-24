@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
 import { FilmCardWrapper, Name, Description, StyledLink } from './style'
 import FilmCard from '../../models/FilmCard'
@@ -32,14 +31,4 @@ export default function Film(props: FilmCardProps) {
 			</FilmCardWrapper>
 		</StyledLink>
 	)
-}
-
-Film.propTypes = {
-	film: PropTypes.shape({
-		posterUrl: PropTypes.string,
-		title: PropTypes.string.isRequired,
-		overview: PropTypes.string.isRequired,
-		id: PropTypes.number,
-	}),
-	preload: PropTypes.bool,
 }

@@ -1,3 +1,5 @@
+import { Genre } from '../models/SpecifyMovie'
+
 const genres = `{
     "genres": [
         {
@@ -79,6 +81,6 @@ const genres = `{
     ]
 }`
 
-const genresArray = JSON.parse(genres).genres
+const genresArray: Genre[] = JSON.parse(genres).genres
 
 export default genresArray

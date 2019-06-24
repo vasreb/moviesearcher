@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 import genres from '../../constants/genres'
 import { sorts } from '../../constants/FilterConstants'
 import { MergeProps as Props } from '../../containers/HeaderSearchContainer'
@@ -37,13 +36,13 @@ export default function SearchHeader(props: Props) {
 	const genresInputs = genres.map(genre => (
 		<div key={genre.id}>
 			<Genre
-				id={genre.id}
+				id={genre.id.toString()}
 				type="checkbox"
 				value={genre.id}
 				onChange={() => handleToggleGenre(genre.id)}
 				checked={doesContainGenre(genre.id)}
 			/>
-			<GenreLabel htmlFor={genre.id}>{genre.name}</GenreLabel>
+			<GenreLabel htmlFor={genre.id.toString()}>{genre.name}</GenreLabel>
 		</div>
 	))
 	const sortsRadio = sorts.map(sort => (
@@ -86,15 +85,4 @@ export default function SearchHeader(props: Props) {
 			</SearchOptionsWrap>
 		</SearchWrapper>
 	)
-}
-
-SearchHeader.propTypes = {
-	handleQuerySearch: PropTypes.func.isRequired,
-	query: PropTypes.string,
-	handleToggleGenre: PropTypes.func.isRequired,
-	doesContainGenre: PropTypes.func.isRequired,
-	handleChangeSort: PropTypes.func.isRequired,
-	isAsc: PropTypes.bool.isRequired,
-	handleSortDirection: PropTypes.func.isRequired,
-	doesThisSort: PropTypes.func.isRequired,
 }

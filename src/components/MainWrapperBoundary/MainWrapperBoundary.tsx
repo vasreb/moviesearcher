@@ -9,12 +9,16 @@ const MainWrapper = styled.main`
 	height: 100%;
 `
 
+interface Error {
+	message: string;
+}
+
 export default class MainWrapperBoundary extends Component {
 	public state = {
 		isError: false,
 		error: null,
 	}
-	public static getDerivedStateFromError(error) {
+	public static getDerivedStateFromError(error: Error) {
 		return { isError: true, error: error.message }
 	}
 

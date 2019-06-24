@@ -1,7 +1,6 @@
 import React from 'react'
 import FilmCard from '../FilmCard/FilmCard'
 import InfiniteScroll from 'react-infinite-scroller'
-import PropTypes from 'prop-types'
 import { FilmsWrapper, EmptyListPlaceholder } from './style'
 import ReactLoading from 'react-loading'
 import { FilmListProps } from '../../models/abstract'
@@ -40,15 +39,4 @@ export default function FilmList(props: FilmListProps) {
 			<FilmsWrapper>{isLoading ? [...filmCards, ...Preloader] : filmCards}</FilmsWrapper>
 		</InfiniteScroll>
 	)
-}
-
-FilmList.propTypes = {
-	fetchData: PropTypes.func.isRequired,
-	films: PropTypes.shape({
-		data: PropTypes.array.isRequired,
-		isLoading: PropTypes.bool.isRequired,
-		currentPage: PropTypes.number.isRequired,
-		totalPages: PropTypes.number,
-	}),
-	placeholder: PropTypes.string,
 }
