@@ -9,11 +9,20 @@ const MainWrapper = styled.main`
 	height: 100%;
 `
 
+interface Props {
+	children: any;
+}
+
 interface Error {
 	message: string;
 }
 
-export default class MainWrapperBoundary extends Component {
+interface BoundaryState {
+	isError: boolean;
+	error: any;
+}
+
+export default class MainWrapperBoundary extends Component<Props, BoundaryState> {
 	public state = {
 		isError: false,
 		error: null,
