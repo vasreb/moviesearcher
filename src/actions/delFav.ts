@@ -1,13 +1,12 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { DelFavoriteAction } from './IAction'
+import { ActionCreator } from 'redux'
 
-interface DelFavAction {
-	type: ActionTypeKeys.DEL_FAV_ID;
-	payload: number;
-}
-
-export default function DelFav(id: number): DelFavAction {
+const DelFav: ActionCreator<DelFavoriteAction> = (id: number) => {
 	return {
 		type: ActionTypeKeys.DEL_FAV_ID,
 		payload: id,
 	}
 }
+
+export default DelFav

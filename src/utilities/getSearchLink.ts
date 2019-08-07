@@ -10,6 +10,7 @@ export default function getSearchLink() {
 			if (query.length > 0) {
 				return `/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
 			} //not a bug but feature
+		// eslint-disable-next-line
 		case FILTER:
 			return `/discover/movie?api_key=${API_KEY}&vote_count.gte=200&sort_by=${sort}.${
 				isAsc ? ASC : DESC

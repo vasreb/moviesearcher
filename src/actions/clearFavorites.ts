@@ -1,11 +1,10 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { ClearFavoritesAction } from './IAction'
+import { ActionCreator } from 'redux'
 
-export interface ClearFavoritesAction {
-	type: ActionTypeKeys.CLEAR_FAVS;
-}
-
-export default function clearFavorites(): ClearFavoritesAction {
+const clearFavorites: ActionCreator<ClearFavoritesAction> = () => {
 	return {
 		type: ActionTypeKeys.CLEAR_FAVS,
 	}
 }
+export default clearFavorites

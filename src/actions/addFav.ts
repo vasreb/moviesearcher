@@ -1,11 +1,7 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { AddFavoriteAction } from './IAction'
 
-interface AddFavAction {
-	type: ActionTypeKeys.ADD_FAV_ID;
-	payload: number;
-}
-
-export default function addFav(id: number): AddFavAction {
+export default function addFav(id: number): AddFavoriteAction {
 	return {
 		type: ActionTypeKeys.ADD_FAV_ID,
 		payload: id,

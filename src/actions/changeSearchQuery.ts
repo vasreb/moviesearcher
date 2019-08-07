@@ -1,13 +1,12 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { ChangeSearchQueryAction } from './IAction'
+import { ActionCreator } from 'redux'
 
-export interface ChangeSearchQueryAction {
-	type: ActionTypeKeys.CHANGE_SEARCH_QUERY;
-	payload: string;
-}
-
-export default function changeSearchQuery(text: string): ChangeSearchQueryAction {
+const changeSearchQuery: ActionCreator<ChangeSearchQueryAction> = (text: string) => {
 	return {
 		type: ActionTypeKeys.CHANGE_SEARCH_QUERY,
 		payload: text,
 	}
 }
+
+export default changeSearchQuery

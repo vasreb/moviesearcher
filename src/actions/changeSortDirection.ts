@@ -1,11 +1,11 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
+import { ChangeSortDirectionAction } from './IAction'
+import { ActionCreator } from 'redux'
 
-export interface ChangeSortDirectionAction {
-	type: ActionTypeKeys.CHANGE_SORT_DIRECTION;
-}
-
-export default function changeSortDirection(): ChangeSortDirectionAction {
+const changeSortDirection: ActionCreator<ChangeSortDirectionAction> = () => {
 	return {
 		type: ActionTypeKeys.CHANGE_SORT_DIRECTION,
 	}
 }
+
+export default changeSortDirection

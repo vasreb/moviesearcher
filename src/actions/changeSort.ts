@@ -1,14 +1,13 @@
 import { ActionTypeKeys } from './ActionTypeKeys'
 import { SearchSort } from '../constants/FilterConstants'
+import { ChangeSortAction } from './IAction'
+import { ActionCreator } from 'redux'
 
-export interface ChangeSortAction {
-	type: ActionTypeKeys.CHANGE_SORT;
-	payload: string;
-}
-
-export default function changeSort(sortName: SearchSort): ChangeSortAction {
+const changeSort: ActionCreator<ChangeSortAction> = (sortName: SearchSort) => {
 	return {
 		type: ActionTypeKeys.CHANGE_SORT,
 		payload: sortName,
 	}
 }
+
+export default changeSort

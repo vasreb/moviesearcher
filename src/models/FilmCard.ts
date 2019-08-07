@@ -4,3 +4,4 @@ export default interface FilmCard {
 	title: string;
 	overview: string;
 }
+
