@@ -8,11 +8,11 @@ import { AppState } from '../reducers/main'
 import * as State from '../reducers/State'
 import { Action } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
-import { FilmListProps } from '../models/abstract'
+import { FilmListProps, FilmList as IFilmList } from '../models/abstract'
 
 interface StateFromProps {
 	favoriteIds: State.FavoriteIds;
-	filmsFavorite: State.FavoriteFilms;
+	filmsFavorite: IFilmList;
 	error: State.Error;
 }
 
@@ -22,7 +22,6 @@ interface DispatchFromProps {
 
 interface MergeProps extends FilmListProps {
 	fetchData: () => void;
-	films: State.FavoriteFilms;
 	clearFavs: () => void;
 	error: State.Error;
 }

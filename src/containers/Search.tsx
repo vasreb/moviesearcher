@@ -5,10 +5,10 @@ import { AppState } from '../reducers/main'
 import * as State from '../reducers/State'
 import { Action } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
-import { FilmListProps } from '../models/abstract'
+import { FilmListProps, FilmList as IFilmList } from '../models/abstract'
 
 interface StateFromProps {
-	filmsSearch: State.SearchFilms;
+	filmsSearch: IFilmList;
 	error: State.Error;
 	currentPage: number;
 }
@@ -19,7 +19,7 @@ interface DispatchFromProps {
 
 interface MergeProps extends FilmListProps {
 	fetchData: () => void;
-	films: State.FavoriteFilms;
+	films: IFilmList;
 	placeholder: string;
 	error: State.Error;
 }

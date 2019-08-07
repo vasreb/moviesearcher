@@ -1,4 +1,5 @@
 import * as State from '../reducers/State'
+import FilmCard from './FilmCard'
 
 export interface Page {
 	isLoading: boolean;
@@ -8,11 +9,12 @@ export interface Page {
 export interface FilmList extends Page {
 	totalPages: number;
 	currentPage: number;
+	data: FilmCard[];
 }
 
 export interface FilmListProps {
 	fetchData: () => void;
-	films: any;
+	films: FilmList;
 	error: State.Error;
 	placeholder?: string;
 }

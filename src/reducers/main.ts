@@ -11,11 +11,11 @@ import error from './error'
 import * as State from './State'
 
 export interface AppState {
-	filmsBest: State.BestFilms;
+	filmsBest: State.FilmList;
 	movie: State.Movie;
-	filmsSearch: State.SearchFilms;
+	filmsSearch: State.FilmList;
 	favoriteIds: State.FavoriteIds
-	filmsFavorite: State.FavoriteFilms;
+	filmsFavorite: State.FilmList;
 	filters: State.Filter;
 	searchMode: State.SearchMode;
 	error: State.Error;

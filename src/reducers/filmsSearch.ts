@@ -2,14 +2,14 @@ import { ActionTypeKeys } from '../actions/ActionTypeKeys'
 import { GetSearchAction } from '../actions/ActionTypes'
 import * as State from './State'
 
-export const init: State.SearchFilms = {
+export const init: State.FilmList = {
 	isLoading: false,
 	data: [],
 	totalPages: 0,
 	currentPage: 1,
 }
 
-export default function filmsSearch(state = init, action: GetSearchAction): State.SearchFilms {
+export default function filmsSearch(state = init, action: GetSearchAction): State.FilmList {
 	switch (action.type) {
 		case ActionTypeKeys.NEW_SEARCH_REQUEST:
 			return {

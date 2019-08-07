@@ -4,8 +4,8 @@ import fetchMovie from '../actions/fetchMovie'
 import { AppState } from '../reducers/main'
 import * as State from '../reducers/State'
 import { ThunkDispatch } from 'redux-thunk'
-import { Action } from 'redux'
 import { RouteComponentProps, match } from 'react-router-dom'
+import { GetMovieAction } from '../actions/ActionTypes'
 
 interface StateFromProps {
 	movie: State.Movie;
@@ -13,7 +13,7 @@ interface StateFromProps {
 }
 
 interface DispatchFromProps {
-	dispatch: ThunkDispatch<AppState, null, Action<string>>;
+	dispatch: ThunkDispatch<AppState, null, GetMovieAction>;
 }
 
 interface RouterParams {
@@ -38,7 +38,7 @@ const mapStateToProps = (state: AppState): StateFromProps => {
 	}
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, Action<string>>): DispatchFromProps => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, GetMovieAction>): DispatchFromProps => {
 	return {
 		dispatch,
 	}

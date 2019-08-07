@@ -2,14 +2,14 @@ import { ActionTypeKeys } from '../actions/ActionTypeKeys'
 import { GetBestAction } from '../actions/ActionTypes'
 import * as State from './State'
 
-export const init: State.BestFilms = {
+export const init: State.FilmList = {
 	isLoading: false,
 	data: [],
 	totalPages: 0,
 	currentPage: 1,
 }
 
-export default function filmsBest(state = init, action: GetBestAction): State.BestFilms {
+export default function filmsBest(state = init, action: GetBestAction): State.FilmList {
 	switch (action.type) {
 		case ActionTypeKeys.NEW_BEST_REQUEST:
 			return {
