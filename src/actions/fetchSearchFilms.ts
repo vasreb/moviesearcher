@@ -8,8 +8,10 @@ import { ActionCreator, Dispatch } from 'redux'
 import { GetSearchRequestAction, GetSearchSuccessAction, GetErrorAction } from './IAction'
 import { GetSearchAction } from './ActionTypes'
 
-const fetchSearchFilms: ActionCreator<ThunkAction<void, AppState, null, GetSearchAction>> = (page: number) => {
-	const link = getSearchLink()
+export const fetchSearchFilms: ActionCreator<ThunkAction<void, AppState, null, GetSearchAction>> = (
+	page: number,
+	link: string
+) => {
 	return async (dispatch: Dispatch) => {
 		const getMovieRequestAction: GetSearchRequestAction = {
 			type: ActionTypeKeys.GET_SEARCH_REQUEST,
@@ -50,4 +52,4 @@ const fetchSearchFilms: ActionCreator<ThunkAction<void, AppState, null, GetSearc
 	}
 }
 
-export default fetchSearchFilms
+export default (num: number) => fetchSearchFilms(num, getSearchLink())
